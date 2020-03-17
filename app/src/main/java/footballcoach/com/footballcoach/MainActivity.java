@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -136,15 +137,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public ArrayList<Match> initializeMatchList(){
         ArrayList<Match> res = new ArrayList<>();
+
         Date c = Calendar.getInstance().getTime();
+
         res.add(new Match(
                 1,
                 "MyTeam",
                 "YourTeam1",
                 "Friendly",
                 c,
-                new TeamStats(),
-                new TeamStats(),
+                new TeamStats(1),
+                new TeamStats(1),
                 R.drawable.ic_menu_camera
                 ));
         res.add(new Match(
@@ -153,8 +156,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "YourTeam2",
                 "Cup",
                 c,
-                new TeamStats(),
-                new TeamStats(),
+                new TeamStats(2),
+                new TeamStats(1),
                 R.drawable.ic_menu_camera
         ));
         res.add(new Match(
@@ -163,8 +166,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "YourTeam3",
                 "League",
                 c,
-                new TeamStats(),
-                new TeamStats(),
+                new TeamStats(3),
+                new TeamStats(4),
                 R.drawable.ic_menu_camera
         ));
         res.add(new Match(
@@ -173,8 +176,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "YourTeam4",
                 "League",
                 c,
-                new TeamStats(),
-                new TeamStats(),
+                new TeamStats(5),
+                new TeamStats(1),
                 R.drawable.ic_menu_camera
         ));
         res.add(new Match(
@@ -183,8 +186,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "YourTeam5",
                 "League",
                 c,
-                new TeamStats(),
-                new TeamStats(),
+                new TeamStats(1),
+                new TeamStats(0),
                 R.drawable.ic_menu_camera
         ));
         res.add(new Match(
@@ -193,8 +196,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 "YourTeam6",
                 "League",
                 c,
-                new TeamStats(),
-                new TeamStats(),
+                new TeamStats(2),
+                new TeamStats(2),
                 R.drawable.ic_menu_camera
         ));
         return res;

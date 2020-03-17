@@ -3,6 +3,7 @@ package footballcoach.com.footballcoach;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Match implements Parcelable {
@@ -10,7 +11,7 @@ public class Match implements Parcelable {
     String homeName;
     String opponentName;
     String gameType;
-    Date playedWhen;
+    String playedWhen;
     TeamStats homeStats;
     TeamStats awayStats;
     private int imageId;
@@ -20,7 +21,9 @@ public class Match implements Parcelable {
         this.homeName = homeName;
         this.opponentName = opponentName;
         this.gameType = gameType;
-        this.playedWhen = playedWhen;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+        String strDate = formatter.format(playedWhen);
+        this.playedWhen = strDate;
         this.homeStats = homeStats;
         this.awayStats = awayStats;
         this.imageId = imageId;
@@ -31,6 +34,7 @@ public class Match implements Parcelable {
         homeName = in.readString();
         opponentName = in.readString();
         gameType = in.readString();
+        playedWhen = in.readString();
         homeStats = in.readParcelable(TeamStats.class.getClassLoader());
         awayStats = in.readParcelable(TeamStats.class.getClassLoader());
         imageId = in.readInt();
@@ -42,6 +46,7 @@ public class Match implements Parcelable {
         dest.writeString(homeName);
         dest.writeString(opponentName);
         dest.writeString(gameType);
+        dest.writeString(playedWhen);
         dest.writeParcelable(homeStats, flags);
         dest.writeParcelable(awayStats, flags);
         dest.writeInt(imageId);
@@ -76,7 +81,7 @@ public class Match implements Parcelable {
         return gameType;
     }
 
-    public Date getPlayedWhen() {
+    public String getPlayedWhen() {
         return playedWhen;
     }
 

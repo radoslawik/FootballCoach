@@ -43,9 +43,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         Match match = matchList.get(position);
 
         holder.textViewTitle.setText(match.getTitle());
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-        String strDate = formatter.format(match.getPlayedWhen());
-        holder.textViewDate.setText(strDate);
+        holder.textViewDate.setText(match.getPlayedWhen());
         holder.textViewGameType.setText(match.getGameType());
         holder.textViewScore.setText(match.getScore());
         holder.imageView.setImageDrawable(myContext.getResources().getDrawable(match.getImageId(), null));
