@@ -15,6 +15,15 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
 
     private Context myContext;
     private List<Match> matchList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void OnItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
     public MatchAdapter(Context myContext, List<Match> matchList) {
         this.myContext = myContext;
@@ -25,7 +34,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     public MatchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(myContext);
         View view = inflater.inflate(R.layout.list_layout, parent, false);
-        MatchViewHolder holder = new MatchViewHolder(view);
+        MatchViewHolder holder = new MatchViewHolder(view, mListener);
         return holder;
     }
 
@@ -47,10 +56,10 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         return matchList.size();
     }
 
-    class MatchViewHolder extends RecyclerView.ViewHolder{
+    public static class MatchViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView textViewTitle, textViewScore, textViewDate, textViewGameType;
-        public MatchViewHolder(View itemView) {
+        public MatchViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.imageView);
@@ -58,6 +67,18 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             textViewScore = itemView.findViewById(R.id.textViewScore);
             textViewDate = itemView.findViewById(R.id.textViewDate);
             textViewGameType = itemView.findViewById(R.id.textViewGameType);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.OnItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

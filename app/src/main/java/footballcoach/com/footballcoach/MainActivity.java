@@ -1,5 +1,6 @@
 package footballcoach.com.footballcoach;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,12 +21,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView recyclerView;
-    MatchAdapter adapter;
-    List<Match> matchList;
+    private RecyclerView recyclerView;
+    private MatchAdapter adapter;
+    private ArrayList<Match> matchList;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,22 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MatchAdapter(this, matchList);
         recyclerView.setAdapter(adapter);
+
+        intent = new Intent(this, MatchDisplayActivity.class);
+        intent.putParcelableArrayListExtra("data", matchList);
+
+        adapter.setOnItemClickListener(new MatchAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                System.out.println("Clicked item number:");
+                System.out.println(position);
+                intent.putExtra("pos", position);
+                startActivity(intent);
+            }
+        });
+
+        System.out.println("mainAct");
+        System.out.println(matchList.get(0).getScore());
     }
 
     @Override
@@ -117,13 +134,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public List<Match> initializeMatchList(){
-        List<Match> res = new ArrayList<>();
+    public ArrayList<Match> initializeMatchList(){
+        ArrayList<Match> res = new ArrayList<>();
         Date c = Calendar.getInstance().getTime();
         res.add(new Match(
                 1,
                 "MyTeam",
-                "YourTeam",
+                "YourTeam1",
                 "Friendly",
                 c,
                 new TeamStats(),
@@ -133,7 +150,7 @@ public class MainActivity extends AppCompatActivity
         res.add(new Match(
                 1,
                 "MyTeam",
-                "KEKW",
+                "YourTeam2",
                 "Cup",
                 c,
                 new TeamStats(),
@@ -143,7 +160,7 @@ public class MainActivity extends AppCompatActivity
         res.add(new Match(
                 1,
                 "MyTeam",
-                "KEKW V2",
+                "YourTeam3",
                 "League",
                 c,
                 new TeamStats(),
@@ -153,7 +170,7 @@ public class MainActivity extends AppCompatActivity
         res.add(new Match(
                 1,
                 "MyTeam",
-                "KEKW V2",
+                "YourTeam4",
                 "League",
                 c,
                 new TeamStats(),
@@ -163,7 +180,7 @@ public class MainActivity extends AppCompatActivity
         res.add(new Match(
                 1,
                 "MyTeam",
-                "KEKW V2",
+                "YourTeam5",
                 "League",
                 c,
                 new TeamStats(),
@@ -173,7 +190,7 @@ public class MainActivity extends AppCompatActivity
         res.add(new Match(
                 1,
                 "MyTeam",
-                "KEKW V2",
+                "YourTeam6",
                 "League",
                 c,
                 new TeamStats(),
