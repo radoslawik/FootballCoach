@@ -102,7 +102,7 @@ public class MatchDisplayFragment extends Fragment {
         tvDate.setText(mEntry.getPlayedWhen());
         tvLocation.setText("PARIS TODO");
 
-        tvHomeBallPos.setText(String.valueOf(mEntry.homeStats.getScored()));
+        tvHomeBallPos.setText(String.valueOf(mEntry.homeStats.getPossesion()));
         tvHomeCorners.setText(String.valueOf(mEntry.homeStats.getCorners()));
         tvHomeFouls.setText(String.valueOf(mEntry.homeStats.getFouls()));
         tvHomeOffsides.setText(String.valueOf(mEntry.homeStats.getOffsides()));
@@ -115,7 +115,7 @@ public class MatchDisplayFragment extends Fragment {
         tvHomeTeamName.setText(String.valueOf(mEntry.homeName));
         tvHomeYellows.setText(String.valueOf(mEntry.homeStats.getYellow_cards()));
 
-        tvAwayBallPos.setText(String.valueOf(mEntry.awayStats.getScored()));
+        tvAwayBallPos.setText(String.valueOf(mEntry.awayStats.getPossesion()));
         tvAwayCorners.setText(String.valueOf(mEntry.awayStats.getCorners()));
         tvAwayFouls.setText(String.valueOf(mEntry.awayStats.getFouls()));
         tvAwayOffsides.setText(String.valueOf(mEntry.awayStats.getOffsides()));

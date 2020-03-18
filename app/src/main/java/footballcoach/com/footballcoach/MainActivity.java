@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private MatchAdapter adapter;
     private ArrayList<Match> matchList;
     private Intent intent;
+    private final String TEAM_NAME = "MyTeam";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, AddMatchActivity.class));
             }
         });
 
@@ -88,27 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -142,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         res.add(new Match(
                 1,
-                "MyTeam",
+                TEAM_NAME,
                 "YourTeam1",
                 "Friendly",
                 c,
@@ -152,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ));
         res.add(new Match(
                 1,
-                "MyTeam",
+                TEAM_NAME,
                 "YourTeam2",
                 "Cup",
                 c,
@@ -162,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
         res.add(new Match(
                 1,
-                "MyTeam",
+                TEAM_NAME,
                 "YourTeam3",
                 "League",
                 c,
@@ -172,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
         res.add(new Match(
                 1,
-                "MyTeam",
+                TEAM_NAME,
                 "YourTeam4",
                 "League",
                 c,
@@ -182,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
         res.add(new Match(
                 1,
-                "MyTeam",
+                TEAM_NAME,
                 "YourTeam5",
                 "League",
                 c,
@@ -192,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
         res.add(new Match(
                 1,
-                "MyTeam",
+                TEAM_NAME,
                 "YourTeam6",
                 "League",
                 c,
