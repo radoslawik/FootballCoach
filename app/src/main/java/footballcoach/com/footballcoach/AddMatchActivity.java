@@ -1,6 +1,7 @@
 package footballcoach.com.footballcoach;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,14 +16,19 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,8 +46,13 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
     private LocationManager locationManager;
     private String locationProvider;
     protected LocationListener locationListener;
+
     static final int REQUEST_TAKE_PHOTO = 1;
     String currentPhotoPath;
+
+    private SeekBar seekbarHomePassAcc, seekbarAwayPassAcc, seekbarBallPos;
+    private TextView tvHomePassAcc, tvAwayPassAcc, tvHomeBallPos, tvAwayBallPos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +69,7 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
+        // location part
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         locationProvider = locationManager.getBestProvider(criteria, false);
@@ -81,6 +93,101 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         TextView txtDate = (TextView) findViewById(R.id.tvDate);
         txtDate.setText(strDate);
 
+        //seekbars part
+        seekbarHomePassAcc = (SeekBar)findViewById(R.id.seekbarHomePassAcc);
+        tvHomePassAcc = (TextView)findViewById(R.id.tvHomePassAcc);
+        seekbarHomePassAcc.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvHomePassAcc.setText(String.valueOf(progress) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+        });
+
+        seekbarAwayPassAcc = (SeekBar)findViewById(R.id.seekbarAwayPassAcc);
+        tvAwayPassAcc = (TextView)findViewById(R.id.tvAwayPassAcc);
+        seekbarAwayPassAcc.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvAwayPassAcc.setText(String.valueOf(progress) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+        });
+
+        seekbarAwayPassAcc = (SeekBar)findViewById(R.id.seekbarAwayPassAcc);
+        tvAwayPassAcc = (TextView)findViewById(R.id.tvAwayPassAcc);
+        seekbarAwayPassAcc.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvAwayPassAcc.setText(String.valueOf(progress) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+        });
+
+        seekbarBallPos = (SeekBar)findViewById(R.id.seekbarBallPos);
+        tvAwayBallPos = (TextView)findViewById(R.id.tvAwayBallPos);
+        tvHomeBallPos = (TextView)findViewById(R.id.tvHomeBallPos);
+        seekbarBallPos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvHomeBallPos.setText(String.valueOf(progress)+"%");
+                tvAwayBallPos.setText(String.valueOf(seekBar.getMax()-progress)+"%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                return;
+            }
+        });
+
+    }
+
+    public void addNewMatch(View view){
+        Intent retIntent = new Intent();
+        Match newMatch = new Match(
+                1,
+                "",
+                "fakeOne",
+                "Friendly",
+                Calendar.getInstance().getTime(),
+                new TeamStats(3),
+                new TeamStats(4),
+                R.drawable.ic_menu_camera);
+        retIntent.putExtra("newMatch", newMatch);
+        setResult(Activity.RESULT_OK, retIntent);
+        finish();
     }
 
     @Override

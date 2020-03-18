@@ -1,5 +1,6 @@
 package footballcoach.com.footballcoach;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<Match> matchList;
     private Intent intent;
     private final String TEAM_NAME = "MyTeam";
+    private int ADD_MATCH_RESULT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddMatchActivity.class));
+                Intent intentAddMatch =  new Intent(MainActivity.this, AddMatchActivity.class);
+                startActivityForResult(intentAddMatch, ADD_MATCH_RESULT);
             }
         });
 
@@ -97,9 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_add) {
+            Intent intentAddMatch =  new Intent(MainActivity.this, AddMatchActivity.class);
+            startActivityForResult(intentAddMatch, ADD_MATCH_RESULT);
+        } else if (id == R.id.nav_delete) {
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -115,6 +119,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_MATCH_RESULT) {
+            if(resultCode == Activity.RESULT_OK){
+                Match result = data.getParcelableExtra("newMatch");
+                matchList.add(0, result );
+                adapter.notifyDataSetChanged();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 
     public ArrayList<Match> initializeMatchList(){
         ArrayList<Match> res = new ArrayList<>();
