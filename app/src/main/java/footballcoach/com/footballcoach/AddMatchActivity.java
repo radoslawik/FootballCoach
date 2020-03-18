@@ -53,7 +53,6 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
     private SeekBar seekbarHomePassAcc, seekbarAwayPassAcc, seekbarBallPos;
     private TextView tvHomePassAcc, tvAwayPassAcc, tvHomeBallPos, tvAwayBallPos;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

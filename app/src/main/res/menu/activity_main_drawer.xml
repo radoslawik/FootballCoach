@@ -6,32 +6,30 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_add"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Add new match" />
+            android:icon="@drawable/ic_add_black"
+            android:title="Add match" />
+        <item
+            android:id="@+id/nav_edit"
+            android:icon="@drawable/ic_create_black"
+            android:title="Edit match" />
         <item
             android:id="@+id/nav_delete"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Delete match" />
+            android:icon="@drawable/ic_clear_black"
+            android:title="Remove match" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_rename"
+            android:icon="@drawable/ic_sort_black"
+            android:title="Rename team" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Credits">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:icon="@drawable/ic_person_pin_black"
+                android:title="Radoslaw Pudelko" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:icon="@drawable/ic_person_pin_black"
+                android:title="Noha Zahran" />
         </menu>
     </item>
 

@@ -16,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,14 +26,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, RenameTeamDialog.RenameTeamListener {
 
     private RecyclerView recyclerView;
     private MatchAdapter adapter;
     private ArrayList<Match> matchList;
     private Intent intent;
-    private final String TEAM_NAME = "MyTeam";
+    private String TEAM_NAME = "MyTeam";
     private int ADD_MATCH_RESULT = 1;
+    private boolean EDIT_MODE = false;
+    private boolean DELETE_MODE = false;
+
+    private TextView tvTeamName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        tvTeamName = headerView.findViewById(R.id.tvTeamName);
 
         matchList = initializeMatchList();
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
@@ -75,9 +84,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 System.out.println("Clicked item number:");
                 System.out.println(position);
                 intent.putExtra("pos", position);
-                startActivity(intent);
+                if(DELETE_MODE){
+                    matchList.remove(position);
+                    adapter.notifyDataSetChanged();
+                    DELETE_MODE = false;
+                    Toast.makeText(getApplicationContext(),"Match deleted",Toast.LENGTH_SHORT).show();
+                } else {
+                    startActivity(intent);
+                }
             }
         });
+
+
 
         System.out.println("mainAct");
         System.out.println(matchList.get(0).getScore());
@@ -104,15 +122,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intentAddMatch =  new Intent(MainActivity.this, AddMatchActivity.class);
             startActivityForResult(intentAddMatch, ADD_MATCH_RESULT);
         } else if (id == R.id.nav_delete) {
+            DELETE_MODE = true;
+            Toast.makeText(this,"Click on the item to delete",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_edit) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_rename) {
+            RenameTeamDialog exampleDialog = new RenameTeamDialog();
+            exampleDialog.show(getSupportFragmentManager(), "rename team dialog");
+        } else {
+            return true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -127,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == ADD_MATCH_RESULT) {
             if(resultCode == Activity.RESULT_OK){
                 Match result = data.getParcelableExtra("newMatch");
+                result.homeName = TEAM_NAME;
                 matchList.add(0, result );
                 adapter.notifyDataSetChanged();
             }
@@ -202,5 +221,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.drawable.ic_menu_camera
         ));
         return res;
+    }
+
+    @Override
+    public void sendText(String teamName) {
+        if(teamName.length()>16 || teamName.isEmpty()){
+            Toast.makeText(this,"Invalid team name",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this,"Team name changed successfully",Toast.LENGTH_SHORT).show();
+            TEAM_NAME = teamName;
+            tvTeamName.setText(TEAM_NAME);
+        }
+        return;
+
     }
 }
