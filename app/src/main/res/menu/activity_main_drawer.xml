@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_stats"
+            android:icon="@drawable/ic_show_chart_black"
+            android:title="Show statistics" />
+        <item
             android:id="@+id/nav_add"
             android:icon="@drawable/ic_add_black"
             android:title="Add match" />

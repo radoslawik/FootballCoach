@@ -20,7 +20,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="4dp">
+            android:padding="4dp"
+            android:background="@color/colorWhite">
 
             <LinearLayout
                 android:id="@+id/llHomeTeam"
@@ -43,6 +44,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="MyTeam"
+                    android:textColor="@color/colorBlack"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:gravity="center"/>
             </LinearLayout>
@@ -68,7 +70,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:padding="4dp"
-                    android:src="@drawable/team"/>
+                    android:src="@drawable/team" />
                 <TextView
                     android:id="@+id/awayTeamName"
                     android:layout_width="match_parent"
@@ -76,6 +78,7 @@
                     android:layout_weight="1"
                     android:text="AwayTeam"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorBlack"
                     android:gravity="center"/>
 
             </LinearLayout>
@@ -94,7 +97,8 @@
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:background="@color/colorLight">
             <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -130,7 +134,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                android:minHeight="100dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -142,6 +147,14 @@
                         android:text="12"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomeShots"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/colorPrimary" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -149,6 +162,14 @@
                         android:text="Shots"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayShots"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/textColorError" />
                     <TextView
                         android:id="@+id/awayShots"
                         android:layout_width="0dp"
@@ -176,6 +197,14 @@
                         android:text="8"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomeOnTarget"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/colorPrimary" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -183,6 +212,14 @@
                         android:text="Shots on target"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayOnTarget"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/textColorError" />
                     <TextView
                         android:id="@+id/awayTargetShots"
                         android:layout_width="0dp"
@@ -210,6 +247,14 @@
                         android:text="57%"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomeBallPos"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/colorPrimary" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -217,6 +262,14 @@
                         android:text="Ball possesion"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayBallPos"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/textColorError" />
                     <TextView
                         android:id="@+id/awayPossesion"
                         android:layout_width="0dp"
@@ -244,6 +297,14 @@
                         android:text="634"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomePasses"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/colorPrimary" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -251,6 +312,14 @@
                         android:text="Passes"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayPasses"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/textColorError"/>
                     <TextView
                         android:id="@+id/awayPasses"
                         android:layout_width="0dp"
@@ -278,6 +347,14 @@
                         android:text="90%"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomePassAcc"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/colorPrimary"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -285,6 +362,14 @@
                         android:text="Pass accuracy"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayPassAcc"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/textColorError"/>
                     <TextView
                         android:id="@+id/awayPassAccuracy"
                         android:layout_width="0dp"
@@ -312,6 +397,14 @@
                         android:text="10"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomeFouls"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_down_black"
+                        android:tint="@color/colorPrimary"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -319,6 +412,14 @@
                         android:text="Fouls"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayFouls"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_down_black"
+                        android:tint="@color/textColorError"/>
                     <TextView
                         android:id="@+id/awayFouls"
                         android:layout_width="0dp"
@@ -346,6 +447,14 @@
                         android:text="3"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomeYellows"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_down_black"
+                        android:tint="@color/colorPrimary"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -353,6 +462,14 @@
                         android:text="Yellow cards"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayYellows"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_down_black"
+                        android:tint="@color/textColorError"/>
                     <TextView
                         android:id="@+id/awayYellows"
                         android:layout_width="0dp"
@@ -380,6 +497,14 @@
                         android:text="0"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomeReds"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_down_black"
+                        android:tint="@color/colorPrimary"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -387,6 +512,14 @@
                         android:text="Red cards"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayReds"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_down_black"
+                        android:tint="@color/textColorError"/>
                     <TextView
                         android:id="@+id/awayReds"
                         android:layout_width="0dp"
@@ -414,6 +547,14 @@
                         android:text="2"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomeOffside"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_down_black"
+                        android:tint="@color/colorPrimary"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -421,6 +562,14 @@
                         android:text="Offsides"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayOffside"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_down_black"
+                        android:tint="@color/textColorError"/>
                     <TextView
                         android:id="@+id/awayOffsides"
                         android:layout_width="0dp"
@@ -448,6 +597,14 @@
                         android:text="1"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomePen"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/colorPrimary"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -455,6 +612,14 @@
                         android:text="Penalties"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayPen"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/textColorError"/>
                     <TextView
                         android:id="@+id/awayPenalties"
                         android:layout_width="0dp"
@@ -482,6 +647,14 @@
                         android:text="5"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imHomeCorners"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/colorPrimary"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -489,6 +662,14 @@
                         android:text="Corners"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/imAwayCorners"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_drop_up_black"
+                        android:tint="@color/textColorError"/>
                     <TextView
                         android:id="@+id/awayCorners"
                         android:layout_width="0dp"
@@ -520,7 +701,8 @@
                         android:maxLines="2"
                         android:textAlignment="gravity"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:layout_gravity="left|center_vertical"/>
+                        android:layout_gravity="left|center_vertical"
+                        android:gravity="center_vertical"/>
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="20dp"
@@ -532,10 +714,9 @@
                         android:id="@+id/matchDate"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_gravity="left|center_vertical"
                         android:layout_weight="2"
                         android:text="date"
-                        android:layout_centerVertical="true"
+                        android:layout_gravity="left|center_vertical"
                         android:gravity="center_vertical"
                         android:textAlignment="gravity"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />

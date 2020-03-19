@@ -28,7 +28,8 @@
                 android:layout_toRightOf="@id/imageView"
                 android:text="MyTeamName vs YourTeamName"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/textViewDate"

@@ -1,6 +1,7 @@
 package footballcoach.com.footballcoach;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +32,10 @@ public class MatchDisplayFragment extends Fragment {
             tvAwayShots, tvAwayTargetShots, tvAwayBallPos, tvAwayPasses, tvAwayPassAcc, tvAwayFouls,
             tvAwayYellows, tvAwayReds, tvAwayOffsides, tvAwayPenalties, tvAwayCorners,
             tvLocation, tvDate;
+    private ImageView imHomeShots, imHomeOnTarget, imHomeBallPos, imHomePasses, imHomePassAcc, imHomeFouls,
+            imHomeYellows, imHomeReds, imHomeOffsides, imHomePenalties, imHomeCorners,
+            imAwayShots, imAwayOnTarget, imAwayBallPos, imAwayPasses, imAwayPassAcc, imAwayFouls,
+            imAwayYellows, imAwayReds, imAwayOffsides, imAwayPenalties, imAwayCorners;
 
     public MatchDisplayFragment() {
         // Required empty public constructor
@@ -93,11 +99,42 @@ public class MatchDisplayFragment extends Fragment {
         tvAwayTargetShots = rootView.findViewById(R.id.awayTargetShots);
         tvAwayYellows = rootView.findViewById(R.id.awayYellows);
         
-        tvLocation= rootView.findViewById(R.id.matchLocation);
+        tvLocation = rootView.findViewById(R.id.matchLocation);
         tvDate = rootView.findViewById(R.id.matchDate);
         tvScore = rootView.findViewById(R.id.score);
 
+        imHomeBallPos = rootView.findViewById(R.id.imHomeBallPos);
+        imHomeCorners = rootView.findViewById(R.id.imHomeCorners);
+        imHomeFouls = rootView.findViewById(R.id.imHomeFouls);
+        imHomeOffsides = rootView.findViewById(R.id.imHomeOffside);
+        imHomeOnTarget = rootView.findViewById(R.id.imHomeOnTarget);
+        imHomePassAcc = rootView.findViewById(R.id.imHomePassAcc);
+        imHomePasses = rootView.findViewById(R.id.imHomePasses);
+        imHomePenalties = rootView.findViewById(R.id.imHomePen);
+        imHomeReds = rootView.findViewById(R.id.imHomeReds);
+        imHomeShots= rootView.findViewById(R.id.imHomeShots);
+        imHomeYellows = rootView.findViewById(R.id.imHomeYellows);
+        
+        imAwayBallPos = rootView.findViewById(R.id.imAwayBallPos);
+        imAwayCorners = rootView.findViewById(R.id.imAwayCorners);
+        imAwayFouls = rootView.findViewById(R.id.imAwayFouls);
+        imAwayOffsides = rootView.findViewById(R.id.imAwayOffside);
+        imAwayOnTarget = rootView.findViewById(R.id.imAwayOnTarget);
+        imAwayPassAcc = rootView.findViewById(R.id.imAwayPassAcc);
+        imAwayPasses = rootView.findViewById(R.id.imAwayPasses);
+        imAwayPenalties = rootView.findViewById(R.id.imAwayPen);
+        imAwayReds = rootView.findViewById(R.id.imAwayReds);
+        imAwayShots= rootView.findViewById(R.id.imAwayShots);
+        imAwayYellows = rootView.findViewById(R.id.imAwayYellows);
+
         tvScore.setText(mEntry.getScore());
+        if(mEntry.homeStats.getScored()>mEntry.awayStats.getScored()){
+            tvScore.setTextColor(getResources().getColor(R.color.colorPrimary));
+        } else if(mEntry.homeStats.getScored()==mEntry.awayStats.getScored()){
+            // keep black
+        } else {
+            tvScore.setTextColor(getResources().getColor(R.color.textColorError));
+        }
 
         tvDate.setText(mEntry.getPlayedWhen());
         tvLocation.setText(mEntry.getPlayedWhere());
@@ -127,8 +164,80 @@ public class MatchDisplayFragment extends Fragment {
         tvAwayTargetShots.setText(String.valueOf(mEntry.awayStats.getOn_target()));
         tvAwayTeamName.setText(String.valueOf(mEntry.opponentName));
         tvAwayYellows.setText(String.valueOf(mEntry.awayStats.getYellow_cards()));
-
         tvAwayTeamName.setText(mEntry.getOpponentName());
+        
+        if (mEntry.homeStats.getTotal_attemps()>mEntry.awayStats.getTotal_attemps()){
+            imHomeShots.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getTotal_attemps()<mEntry.awayStats.getTotal_attemps()){
+            imAwayShots.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getCorners()>mEntry.awayStats.getCorners()){
+            imHomeCorners.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getCorners()<mEntry.awayStats.getCorners()){
+            imAwayCorners.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getCorners()>mEntry.awayStats.getCorners()){
+            imHomeCorners.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getCorners()<mEntry.awayStats.getCorners()){
+            imAwayCorners.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getFouls()>mEntry.awayStats.getFouls()){
+            imHomeFouls.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getFouls()<mEntry.awayStats.getFouls()){
+            imAwayFouls.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getOffsides()>mEntry.awayStats.getOffsides()){
+            imHomeOffsides.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getOffsides()<mEntry.awayStats.getOffsides()){
+            imAwayOffsides.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getOn_target()>mEntry.awayStats.getOn_target()){
+            imHomeOnTarget.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getOn_target()<mEntry.awayStats.getOn_target()){
+            imAwayOnTarget.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getPass_acc()>mEntry.awayStats.getPass_acc()){
+            imHomePassAcc.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getPass_acc()<mEntry.awayStats.getPass_acc()){
+            imAwayPassAcc.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getPasses()>mEntry.awayStats.getPasses()){
+            imHomePasses.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getPasses()<mEntry.awayStats.getPasses()){
+            imAwayPasses.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getPenalties()>mEntry.awayStats.getPenalties()){
+            imHomePenalties.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getPenalties()<mEntry.awayStats.getPenalties()){
+            imAwayPenalties.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getPossesion()>mEntry.awayStats.getPossesion()){
+            imHomeBallPos.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getPossesion()<mEntry.awayStats.getPossesion()){
+            imAwayBallPos.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getRed_cards()>mEntry.awayStats.getRed_cards()){
+            imHomeReds.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getRed_cards()<mEntry.awayStats.getRed_cards()){
+            imAwayReds.setVisibility(View.VISIBLE);
+        }
+
+        if (mEntry.homeStats.getYellow_cards()>mEntry.awayStats.getYellow_cards()){
+            imHomeYellows.setVisibility(View.VISIBLE);
+        } else if (mEntry.homeStats.getYellow_cards()<mEntry.awayStats.getYellow_cards()){
+            imAwayYellows.setVisibility(View.VISIBLE);
+        }
+
         return rootView;
     }
 

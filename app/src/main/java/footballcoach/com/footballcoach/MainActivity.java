@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        setSupportActionBar(toolbar); // get instance of toolbar
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false); // hide app title
 
         rlMain = (RelativeLayout)findViewById(R.id.rlMain);
 
@@ -140,7 +140,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_add) {
+        if (id == R.id.nav_stats){
+            Toast.makeText(this,"Feature not implemented",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_add) {
             Intent intentAddMatch =  new Intent(MainActivity.this, AddMatchActivity.class);
             startActivityForResult(intentAddMatch, ADD_MATCH_RESULT);
         } else if (id == R.id.nav_delete) {
