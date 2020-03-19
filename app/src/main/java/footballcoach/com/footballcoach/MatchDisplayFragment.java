@@ -100,7 +100,7 @@ public class MatchDisplayFragment extends Fragment {
         tvScore.setText(mEntry.getScore());
 
         tvDate.setText(mEntry.getPlayedWhen());
-        tvLocation.setText("PARIS TODO");
+        tvLocation.setText(mEntry.getPlayedWhere());
 
         tvHomeBallPos.setText(String.valueOf(mEntry.homeStats.getPossesion()));
         tvHomeCorners.setText(String.valueOf(mEntry.homeStats.getCorners()));

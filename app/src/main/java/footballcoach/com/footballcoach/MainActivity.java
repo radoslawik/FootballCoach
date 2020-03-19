@@ -2,6 +2,7 @@ package footballcoach.com.footballcoach;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -67,10 +68,15 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         tvTeamName = headerView.findViewById(R.id.tvTeamName);
+        
+        if(savedInstanceState == null){
+            matchList = new ArrayList<>();
+            //matchList = initializeMatchList();
+        } else {
+            matchList = savedInstanceState.getParcelableArrayList("myList");
+        }
 
         tvEmpty = (TextView)findViewById(R.id.tvEmpty);
-        //matchList = initializeMatchList();
-        matchList = new ArrayList<>();
         checkIfEmpty();
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
@@ -181,60 +187,11 @@ public class MainActivity extends AppCompatActivity
                 "YourTeam1",
                 "Friendly",
                 c,
-                new TeamStats(1),
-                new TeamStats(1),
+                "Defaultstreet,\nParis",
+                new TeamStats(),
+                new TeamStats(),
                 R.drawable.ic_menu_camera
                 ));
-        res.add(new Match(
-                1,
-                TEAM_NAME,
-                "YourTeam2",
-                "Cup",
-                c,
-                new TeamStats(2),
-                new TeamStats(1),
-                R.drawable.ic_menu_camera
-        ));
-        res.add(new Match(
-                1,
-                TEAM_NAME,
-                "YourTeam3",
-                "League",
-                c,
-                new TeamStats(3),
-                new TeamStats(4),
-                R.drawable.ic_menu_camera
-        ));
-        res.add(new Match(
-                1,
-                TEAM_NAME,
-                "YourTeam4",
-                "League",
-                c,
-                new TeamStats(5),
-                new TeamStats(1),
-                R.drawable.ic_menu_camera
-        ));
-        res.add(new Match(
-                1,
-                TEAM_NAME,
-                "YourTeam5",
-                "League",
-                c,
-                new TeamStats(1),
-                new TeamStats(0),
-                R.drawable.ic_menu_camera
-        ));
-        res.add(new Match(
-                1,
-                TEAM_NAME,
-                "YourTeam6",
-                "League",
-                c,
-                new TeamStats(2),
-                new TeamStats(2),
-                R.drawable.ic_menu_camera
-        ));
         return res;
     }
 
@@ -258,4 +215,11 @@ public class MainActivity extends AppCompatActivity
         }
         return;
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("myList", matchList);
+    }
+
 }

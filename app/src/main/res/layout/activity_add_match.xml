@@ -76,6 +76,7 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
                 <EditText
+                    android:id="@+id/etAwayTeamName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
@@ -125,6 +126,7 @@
                     android:layout_marginRight="10dp">
 
                     <EditText
+                        android:id="@+id/etScored"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -134,6 +136,7 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
 
                     <EditText
+                        android:id="@+id/etConceded"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -221,6 +224,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etHomeShots"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -237,6 +241,7 @@
                     android:text="Shots" />
 
                 <EditText
+                    android:id="@+id/etAwayShots"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -254,6 +259,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etHomeOnTarget"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -270,6 +276,7 @@
                     android:text="Shots on target" />
 
                 <EditText
+                    android:id="@+id/etAwayOnTarget"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -336,6 +343,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etHomePasses"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -352,6 +360,7 @@
                     android:text="Passes" />
 
                 <EditText
+                    android:id="@+id/etAwayPasses"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -431,6 +440,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etHomeFouls"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -447,6 +457,7 @@
                     android:text="Fouls" />
 
                 <EditText
+                    android:id="@+id/etAwayFouls"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -463,6 +474,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etHomeYellows"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -479,6 +491,7 @@
                     android:text="Yellow cards" />
 
                 <EditText
+                    android:id="@+id/etAwayYellows"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -495,6 +508,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etHomeReds"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -511,6 +525,7 @@
                     android:text="Red cards" />
 
                 <EditText
+                    android:id="@+id/etAwayReds"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -528,6 +543,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etHomeOffsides"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -544,6 +560,7 @@
                     android:text="Offsides" />
 
                 <EditText
+                    android:id="@+id/etAwayOffsides"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -552,7 +569,6 @@
                     android:gravity="center"
                     android:hint="0" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -561,6 +577,41 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etHomePenalties"
+                    android:inputType="number"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="0" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="Penalties" />
+
+                <EditText
+                    android:id="@+id/etAwayPenalties"
+                    android:inputType="number"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:hint="0" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etHomeCorners"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -577,6 +628,7 @@
                     android:text="Corners" />
 
                 <EditText
+                    android:id="@+id/etAwayCorners"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

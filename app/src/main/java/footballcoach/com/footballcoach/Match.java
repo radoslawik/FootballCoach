@@ -12,11 +12,13 @@ public class Match implements Parcelable {
     String opponentName;
     String gameType;
     String playedWhen;
+    String playedWhere;
     TeamStats homeStats;
     TeamStats awayStats;
     private int imageId;
 
-    public Match(int gameId, String homeName, String opponentName, String gameType, Date playedWhen, TeamStats homeStats, TeamStats awayStats, int imageId) {
+    public Match(int gameId, String homeName, String opponentName, String gameType,
+                 Date playedWhen, String strLoc, TeamStats homeStats, TeamStats awayStats, int imageId) {
         this.gameId = gameId;
         this.homeName = homeName;
         this.opponentName = opponentName;
@@ -24,6 +26,7 @@ public class Match implements Parcelable {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
         String strDate = formatter.format(playedWhen);
         this.playedWhen = strDate;
+        this.playedWhere = strLoc;
         this.homeStats = homeStats;
         this.awayStats = awayStats;
         this.imageId = imageId;
@@ -35,6 +38,7 @@ public class Match implements Parcelable {
         opponentName = in.readString();
         gameType = in.readString();
         playedWhen = in.readString();
+        playedWhere = in.readString();
         homeStats = in.readParcelable(TeamStats.class.getClassLoader());
         awayStats = in.readParcelable(TeamStats.class.getClassLoader());
         imageId = in.readInt();
@@ -47,6 +51,7 @@ public class Match implements Parcelable {
         dest.writeString(opponentName);
         dest.writeString(gameType);
         dest.writeString(playedWhen);
+        dest.writeString(playedWhere);
         dest.writeParcelable(homeStats, flags);
         dest.writeParcelable(awayStats, flags);
         dest.writeInt(imageId);
@@ -85,6 +90,9 @@ public class Match implements Parcelable {
         return playedWhen;
     }
 
+    public String getPlayedWhere() {
+        return playedWhere;
+    }
     public TeamStats getHomeStats() {
         return homeStats;
     }

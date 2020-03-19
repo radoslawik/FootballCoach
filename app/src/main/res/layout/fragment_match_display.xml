@@ -10,7 +10,7 @@
     <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1.2"
         app:cardCornerRadius="3dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true">
@@ -27,13 +27,14 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
 
                 <ImageView
                     android:id="@+id/imageHomeTeam"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1.5"
                     android:padding="4dp"
                     android:src="@drawable/team" />
                 <TextView
@@ -59,12 +60,13 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp">
                 <ImageView
                     android:id="@+id/imageAwayTeam"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1.5"
                     android:padding="4dp"
                     android:src="@drawable/team"/>
                 <TextView
@@ -120,6 +122,7 @@
                     android:paddingBottom="4dp"
                     android:text="Statistics"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
+                    android:textColor="@color/colorWhite"
                     android:textStyle="bold" />
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -127,7 +130,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,7 +164,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -197,7 +198,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -232,7 +232,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -267,7 +266,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -302,7 +300,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -337,7 +334,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -372,7 +368,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -407,7 +402,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -442,7 +436,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -477,7 +470,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -511,24 +503,42 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1.2"
+                    android:padding="5dp">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_mylocation" />
                     <TextView
                         android:id="@+id/matchLocation"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:text="street, city"
+                        android:maxLines="2"
+                        android:textAlignment="gravity"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
+                        android:layout_gravity="left|center_vertical"/>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_lock_idle_alarm" />
+
                     <TextView
                         android:id="@+id/matchDate"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_weight="2"
                         android:text="date"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:textAlignment="gravity"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
                 </LinearLayout>
 
         </LinearLayout>

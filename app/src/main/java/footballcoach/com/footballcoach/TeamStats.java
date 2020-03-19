@@ -83,8 +83,8 @@ public class TeamStats implements Parcelable {
         this.penalties = penalties;
     }
 
-    public TeamStats(int goals) {
-        this.scored = goals;
+    public TeamStats() {
+        this.scored = 0;
         this.total_attemps = 0;
         this.on_target = 0;
         this.possesion = 0;
