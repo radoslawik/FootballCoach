@@ -1,11 +1,13 @@
 package footballcoach.com.footballcoach;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     private boolean DELETE_MODE = false;
 
     private TextView tvTeamName, tvEmpty;
+    private RelativeLayout rlMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+
+        rlMain = (RelativeLayout)findViewById(R.id.rlMain);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         tvTeamName = headerView.findViewById(R.id.tvTeamName);
-        
+
         if(savedInstanceState == null){
             matchList = new ArrayList<>();
             //matchList = initializeMatchList();
@@ -81,7 +87,14 @@ public class MainActivity extends AppCompatActivity
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        int currentOrientation = this.getResources().getConfiguration().orientation;
+        if(currentOrientation == Configuration.ORIENTATION_LANDSCAPE){
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+            rlMain.setBackground(getResources().getDrawable(R.drawable.fcbackground_landscape));
+        } else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            rlMain.setBackground(getResources().getDrawable(R.drawable.fcbackground_portrait));
+        }
         adapter = new MatchAdapter(this, matchList);
         recyclerView.setAdapter(adapter);
 

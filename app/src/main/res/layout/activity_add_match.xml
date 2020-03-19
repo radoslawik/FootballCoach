@@ -73,7 +73,8 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Played versus:"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <EditText
                     android:id="@+id/etAwayTeamName"
@@ -106,6 +107,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:text="Goals scored:"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
                     <TextView
@@ -115,6 +117,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:text="Goals conceded:"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
                 </LinearLayout>
 
@@ -178,6 +181,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Match type:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
 
                 <android.support.v7.widget.AppCompatSpinner

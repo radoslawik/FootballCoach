@@ -46,6 +46,13 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         holder.textViewDate.setText(match.getPlayedWhen());
         holder.textViewGameType.setText(match.getGameType());
         holder.textViewScore.setText(match.getScore());
+        if(match.homeStats.getScored()>match.awayStats.getScored()){
+            holder.textViewScore.setTextColor(myContext.getResources().getColor(R.color.colorPrimary));
+        } else if (match.homeStats.getScored()==match.awayStats.getScored()){
+            // keep black
+        } else {
+            holder.textViewScore.setTextColor(myContext.getResources().getColor(R.color.textColorError));
+        }
         holder.imageView.setImageDrawable(myContext.getResources().getDrawable(match.getImageId(), null));
     }
 
