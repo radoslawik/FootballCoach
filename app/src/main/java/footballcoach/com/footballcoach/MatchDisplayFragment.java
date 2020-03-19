@@ -178,21 +178,15 @@ public class MatchDisplayFragment extends Fragment {
             imAwayCorners.setVisibility(View.VISIBLE);
         }
 
-        if (mEntry.homeStats.getCorners()>mEntry.awayStats.getCorners()){
-            imHomeCorners.setVisibility(View.VISIBLE);
-        } else if (mEntry.homeStats.getCorners()<mEntry.awayStats.getCorners()){
-            imAwayCorners.setVisibility(View.VISIBLE);
-        }
-
-        if (mEntry.homeStats.getFouls()>mEntry.awayStats.getFouls()){
+        if (mEntry.homeStats.getFouls()<mEntry.awayStats.getFouls()){
             imHomeFouls.setVisibility(View.VISIBLE);
-        } else if (mEntry.homeStats.getFouls()<mEntry.awayStats.getFouls()){
+        } else if (mEntry.homeStats.getFouls()>mEntry.awayStats.getFouls()){
             imAwayFouls.setVisibility(View.VISIBLE);
         }
 
-        if (mEntry.homeStats.getOffsides()>mEntry.awayStats.getOffsides()){
+        if (mEntry.homeStats.getOffsides()<mEntry.awayStats.getOffsides()){
             imHomeOffsides.setVisibility(View.VISIBLE);
-        } else if (mEntry.homeStats.getOffsides()<mEntry.awayStats.getOffsides()){
+        } else if (mEntry.homeStats.getOffsides()>mEntry.awayStats.getOffsides()){
             imAwayOffsides.setVisibility(View.VISIBLE);
         }
 
@@ -226,15 +220,15 @@ public class MatchDisplayFragment extends Fragment {
             imAwayBallPos.setVisibility(View.VISIBLE);
         }
 
-        if (mEntry.homeStats.getRed_cards()>mEntry.awayStats.getRed_cards()){
+        if (mEntry.homeStats.getRed_cards()<mEntry.awayStats.getRed_cards()){
             imHomeReds.setVisibility(View.VISIBLE);
-        } else if (mEntry.homeStats.getRed_cards()<mEntry.awayStats.getRed_cards()){
+        } else if (mEntry.homeStats.getRed_cards()>mEntry.awayStats.getRed_cards()){
             imAwayReds.setVisibility(View.VISIBLE);
         }
 
-        if (mEntry.homeStats.getYellow_cards()>mEntry.awayStats.getYellow_cards()){
+        if (mEntry.homeStats.getYellow_cards()<mEntry.awayStats.getYellow_cards()){
             imHomeYellows.setVisibility(View.VISIBLE);
-        } else if (mEntry.homeStats.getYellow_cards()<mEntry.awayStats.getYellow_cards()){
+        } else if (mEntry.homeStats.getYellow_cards()>mEntry.awayStats.getYellow_cards()){
             imAwayYellows.setVisibility(View.VISIBLE);
         }
 
