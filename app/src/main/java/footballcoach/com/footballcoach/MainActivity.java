@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
     private boolean EDIT_MODE = false;
     private boolean DELETE_MODE = false;
 
-    private TextView tvTeamName;
+    private TextView tvTeamName, tvEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,11 @@ public class MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         tvTeamName = headerView.findViewById(R.id.tvTeamName);
 
-        matchList = initializeMatchList();
+        tvEmpty = (TextView)findViewById(R.id.tvEmpty);
+        //matchList = initializeMatchList();
+        matchList = new ArrayList<>();
+        checkIfEmpty();
+
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra("pos", position);
                 if(DELETE_MODE){
                     matchList.remove(position);
+                    checkIfEmpty();
                     adapter.notifyDataSetChanged();
                     DELETE_MODE = false;
                     Toast.makeText(getApplicationContext(),"Match deleted",Toast.LENGTH_SHORT).show();
@@ -94,11 +99,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-
-
-
-        System.out.println("mainAct");
-        System.out.println(matchList.get(0).getScore());
     }
 
     @Override
@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity
                 Match result = data.getParcelableExtra("newMatch");
                 result.homeName = TEAM_NAME;
                 matchList.add(0, result );
+                checkIfEmpty();
                 adapter.notifyDataSetChanged();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -233,6 +234,14 @@ public class MainActivity extends AppCompatActivity
             tvTeamName.setText(TEAM_NAME);
         }
         return;
+    }
 
+    public void checkIfEmpty(){
+        if(matchList.isEmpty()){
+            tvEmpty.setVisibility(View.VISIBLE);
+        } else {
+            tvEmpty.setVisibility(View.GONE);
+        }
+        return;
     }
 }
