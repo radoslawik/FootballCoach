@@ -94,6 +94,9 @@ public class MainActivity extends AppCompatActivity
                     adapter.notifyDataSetChanged();
                     DELETE_MODE = false;
                     Toast.makeText(getApplicationContext(),"Match deleted",Toast.LENGTH_SHORT).show();
+                } else if (EDIT_MODE) {
+                    Toast.makeText(getApplicationContext(),"Edit match feature not available",Toast.LENGTH_SHORT).show();
+                    EDIT_MODE = false;
                 } else {
                     startActivity(intent);
                 }
@@ -122,10 +125,21 @@ public class MainActivity extends AppCompatActivity
             Intent intentAddMatch =  new Intent(MainActivity.this, AddMatchActivity.class);
             startActivityForResult(intentAddMatch, ADD_MATCH_RESULT);
         } else if (id == R.id.nav_delete) {
-            DELETE_MODE = true;
-            Toast.makeText(this,"Click on the item to delete",Toast.LENGTH_SHORT).show();
+            if(matchList.isEmpty()){
+                Toast.makeText(this,"No item to delete",Toast.LENGTH_SHORT).show();
+            } else {
+                EDIT_MODE = false;
+                DELETE_MODE = true;
+                Toast.makeText(this,"Click on the item to delete",Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_edit) {
-
+            if(matchList.isEmpty()) {
+                Toast.makeText(this,"No item to modify",Toast.LENGTH_SHORT).show();
+            } else {
+                DELETE_MODE = false;
+                EDIT_MODE = true;
+                Toast.makeText(this,"Click on the item to modify",Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_rename) {
             RenameTeamDialog exampleDialog = new RenameTeamDialog();
             exampleDialog.show(getSupportFragmentManager(), "rename team dialog");
