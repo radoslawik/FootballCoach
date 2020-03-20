@@ -8,6 +8,7 @@
     tools:context=".MatchDisplayFragment">
 
     <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cvScoreboard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.2"
@@ -17,18 +18,18 @@
 
         <LinearLayout
             android:id="@+id/llScoreboard"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:padding="4dp">
 
             <LinearLayout
                 android:id="@+id/llHomeTeam"
-                android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageHomeTeam"
@@ -37,34 +38,38 @@
                     android:layout_weight="1.5"
                     android:padding="4dp"
                     android:src="@drawable/team"
-                    android:tint="@color/colorPrimaryDark"/>
+                    android:tint="@color/colorPrimaryDark" />
+
                 <TextView
                     android:id="@+id/homeTeamName"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="MyTeam"
-                    android:textColor="@color/colorBlack"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/score"
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
                 android:text="0:2"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:textSize="40sp"
-                android:gravity="center"/>
+                android:textSize="40sp" />
+
             <LinearLayout
                 android:id="@+id/llAwayTeam"
-                android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <ImageView
                     android:id="@+id/imageAwayTeam"
                     android:layout_width="match_parent"
@@ -72,17 +77,18 @@
                     android:layout_weight="1.5"
                     android:padding="4dp"
                     android:src="@drawable/team"
-                    android:tint="@color/colorAccent"/>
+                    android:tint="@color/colorAccent" />
+
                 <TextView
                     android:id="@+id/awayTeamName"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="AwayTeam"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -97,120 +103,150 @@
         app:cardCornerRadius="3dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true">
+
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:background="@color/colorLight">
+            android:background="@color/colorLight"
+            android:fillViewport="true">
+
             <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="4dp">
+                android:id="@+id/llStats"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="4dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp">
 
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="4dp"
-                app:cardUseCompatPadding="true"
-                android:layout_gravity="center">
+                <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="3dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorPrimary"
-                    android:gravity="center"
-                    android:paddingStart="15dp"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="4dp"
-                    android:paddingEnd="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="4dp"
-                    android:text="Statistics"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold" />
-            </android.support.v7.widget.CardView>
-                <include layout="@layout/stats_bar_layout"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center"
+                        android:paddingStart="15dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="4dp"
+                        android:text="Statistics"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold" />
+                </android.support.v7.widget.CardView>
+
+                <include
                     android:id="@+id/layoutShots"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutShotsOnTarget"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutBallPos"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutPasses"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutPassAcc"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutFouls"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutYellows"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutReds"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutOffsides"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutPenalties"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <include layout="@layout/stats_bar_layout"
+                    android:layout_weight="1" />
+
+                <include
                     android:id="@+id/layoutCorners"
+                    layout="@layout/stats_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1.2"
+                    android:orientation="horizontal"
                     android:padding="5dp">
+
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_gravity="right|center_vertical"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_mylocation" />
+
                     <TextView
                         android:id="@+id/matchLocation"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:text="street, city"
-                        android:maxLines="2"
-                        android:textAlignment="gravity"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:layout_gravity="left|center_vertical"
-                        android:gravity="center_vertical"/>
+                        android:layout_weight="4"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:text="street, city"
+                        android:textAlignment="gravity"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="20dp"
@@ -222,15 +258,15 @@
                         android:id="@+id/matchDate"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="date"
                         android:layout_gravity="left|center_vertical"
+                        android:layout_weight="2"
                         android:gravity="center_vertical"
+                        android:text="date"
                         android:textAlignment="gravity"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
                 </LinearLayout>
 
-        </LinearLayout>
+            </LinearLayout>
         </ScrollView>
     </android.support.v7.widget.CardView>
 

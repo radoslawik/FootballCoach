@@ -5,12 +5,15 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ActionMenuView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +24,8 @@ public class MatchDisplayFragment extends Fragment {
     private Match mEntry;
     private TextView tvScore, tvAwayTeamName, tvHomeTeamName, tvLocation, tvDate, homeVal, awayVal, statName;
     private ImageView imHomeVal, imAwayVal;
+    private CardView cvScoreboard;
+    private LinearLayout llStats;
 
     List<String> statNames;
     List<Integer> homeStatValues, awayStatValues;
@@ -52,6 +57,23 @@ public class MatchDisplayFragment extends Fragment {
                              Bundle savedInstanceState) {
         
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_match_display, container, false);
+
+        /* minor layout changes */
+        int currentOrientation = this.getResources().getConfiguration().orientation;
+        cvScoreboard = rootView.findViewById(R.id.cvScoreboard);
+        llStats = rootView.findViewById(R.id.llStats);
+        ActionMenuView.LayoutParams lParams = new ActionMenuView.LayoutParams(
+                ActionMenuView.LayoutParams.MATCH_PARENT,
+                0
+        );
+        if(currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            lParams.weight = 1.8f;
+            llStats.setPaddingRelative(150, 15, 150, 15);
+        } else {
+            lParams.weight = 1.2f;
+            llStats.setPaddingRelative(15, 15, 15, 15);
+        }
+        cvScoreboard.setLayoutParams(lParams);
 
         /* scoreboard part */
         tvHomeTeamName = rootView.findViewById(R.id.homeTeamName);
