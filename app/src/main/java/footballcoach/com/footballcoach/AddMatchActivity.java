@@ -102,6 +102,7 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         //seekbars part
         seekbarHomePassAcc = (SeekBar)findViewById(R.id.seekbarHomePassAcc);
         tvHomePassAcc = (TextView)findViewById(R.id.tvHomePassAcc);
+        homePassAcc = 0; //initial progress;
         seekbarHomePassAcc.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -120,6 +121,7 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
 
         seekbarAwayPassAcc = (SeekBar)findViewById(R.id.seekbarAwayPassAcc);
         tvAwayPassAcc = (TextView)findViewById(R.id.tvAwayPassAcc);
+        awayPassAcc = 0; //initial progress;
         seekbarAwayPassAcc.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -141,6 +143,8 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         seekbarBallPos = (SeekBar)findViewById(R.id.seekbarBallPos);
         tvAwayBallPos = (TextView)findViewById(R.id.tvAwayBallPos);
         tvHomeBallPos = (TextView)findViewById(R.id.tvHomeBallPos);
+        homeBallPos = 50; // initial progress
+        awayBallPos = 50;
         seekbarBallPos.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

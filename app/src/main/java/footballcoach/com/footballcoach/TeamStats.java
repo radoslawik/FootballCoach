@@ -87,7 +87,7 @@ public class TeamStats implements Parcelable {
         this.scored = 0;
         this.total_attemps = 0;
         this.on_target = 0;
-        this.possesion = 0;
+        this.possesion = 50;
         this.passes = 0;
         this.pass_acc = 0;
         this.fouls = 0;

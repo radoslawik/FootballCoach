@@ -399,7 +399,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="50%" />
+                        android:text="0%" />
 
                     <SeekBar
                         android:id="@+id/seekbarHomePassAcc"
@@ -407,7 +407,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:max="100"
-                        android:progress="50" />
+                        android:progress="0" />
                 </LinearLayout>
 
                 <TextView
@@ -430,7 +430,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="50%" />
+                        android:text="0%" />
 
                     <SeekBar
                         android:id="@+id/seekbarAwayPassAcc"
@@ -438,7 +438,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:max="100"
-                        android:progress="50" />
+                        android:progress="0" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

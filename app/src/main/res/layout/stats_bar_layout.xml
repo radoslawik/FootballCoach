@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="3dp"
+        app:cardUseCompatPadding="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/homeValue"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:gravity="center"/>
+            <ImageView
+                android:id="@+id/imHomeValue"
+                android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_arrow_drop_up_black"
+                android:tint="@color/colorPrimary" />
+            <TextView
+                android:id="@+id/statName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Stat"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:gravity="center"/>
+            <ImageView
+                android:id="@+id/imAwayValue"
+                android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_arrow_drop_up_black"
+                android:tint="@color/textColorError" />
+            <TextView
+                android:id="@+id/awayValue"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:gravity="center"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

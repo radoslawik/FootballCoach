@@ -23,20 +23,17 @@ public class MatchDisplayActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_display);
 
+        /* gets the parameters from main activity */
         Bundle bundle = getIntent().getExtras();
-        this.matchList = bundle.getParcelableArrayList("data");
-        this.currentPos = bundle.getInt("pos");
+        matchList = bundle.getParcelableArrayList("data");
+        currentPos = bundle.getInt("pos");
 
-        mPager = (ViewPager) findViewById(R.id.pager);
-        pagerAdapter = new MatchDisplayAdapter (getSupportFragmentManager());
+        /* sets the page adapter together */
+        mPager = findViewById(R.id.pager);
+        pagerAdapter = new MatchDisplayAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
+        /* show clicked item */
         mPager.setCurrentItem(currentPos);
-
-        System.out.println("currentPos");
-        System.out.println(currentPos);
-        System.out.println("fragAct");
-        System.out.println(matchList.get(currentPos).getTitle());
-        System.out.println(matchList.get(currentPos).homeStats.scored);
 
     }
 

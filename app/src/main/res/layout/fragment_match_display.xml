@@ -20,8 +20,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="4dp"
-            android:background="@color/colorWhite">
+            android:padding="4dp">
 
             <LinearLayout
                 android:id="@+id/llHomeTeam"
@@ -37,7 +36,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:padding="4dp"
-                    android:src="@drawable/team" />
+                    android:src="@drawable/team"
+                    android:tint="@color/colorPrimaryDark"/>
                 <TextView
                     android:id="@+id/homeTeamName"
                     android:layout_width="match_parent"
@@ -46,6 +46,7 @@
                     android:text="MyTeam"
                     android:textColor="@color/colorBlack"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
                     android:gravity="center"/>
             </LinearLayout>
             <TextView
@@ -70,7 +71,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:padding="4dp"
-                    android:src="@drawable/team" />
+                    android:src="@drawable/team"
+                    android:tint="@color/colorAccent"/>
                 <TextView
                     android:id="@+id/awayTeamName"
                     android:layout_width="match_parent"
@@ -79,6 +81,7 @@
                     android:text="AwayTeam"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
                     android:gravity="center"/>
 
             </LinearLayout>
@@ -129,556 +132,62 @@
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold" />
             </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutShots"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homeShots"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="12"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomeShots"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/colorPrimary" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Shots"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayShots"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/textColorError" />
-                    <TextView
-                        android:id="@+id/awayShots"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="8"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutShotsOnTarget"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homeTargetShots"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="8"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomeOnTarget"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/colorPrimary" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Shots on target"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayOnTarget"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/textColorError" />
-                    <TextView
-                        android:id="@+id/awayTargetShots"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="2"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutBallPos"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homePossesion"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="57%"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomeBallPos"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/colorPrimary" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Ball possesion"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayBallPos"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/textColorError" />
-                    <TextView
-                        android:id="@+id/awayPossesion"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="43%"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutPasses"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homePasses"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="634"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomePasses"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/colorPrimary" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Passes"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayPasses"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/textColorError"/>
-                    <TextView
-                        android:id="@+id/awayPasses"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="562"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutPassAcc"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homePassAccuracy"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="90%"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomePassAcc"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Pass accuracy"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayPassAcc"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/textColorError"/>
-                    <TextView
-                        android:id="@+id/awayPassAccuracy"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="80%"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutFouls"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homeFouls"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="10"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomeFouls"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_down_black"
-                        android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Fouls"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayFouls"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_down_black"
-                        android:tint="@color/textColorError"/>
-                    <TextView
-                        android:id="@+id/awayFouls"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="8"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutYellows"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homeYellows"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="3"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomeYellows"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_down_black"
-                        android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Yellow cards"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayYellows"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_down_black"
-                        android:tint="@color/textColorError"/>
-                    <TextView
-                        android:id="@+id/awayYellows"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="1"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutReds"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homeReds"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomeReds"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_down_black"
-                        android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Red cards"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayReds"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_down_black"
-                        android:tint="@color/textColorError"/>
-                    <TextView
-                        android:id="@+id/awayReds"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="1"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutOffsides"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homeOffsides"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="2"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomeOffside"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_down_black"
-                        android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Offsides"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayOffside"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_down_black"
-                        android:tint="@color/textColorError"/>
-                    <TextView
-                        android:id="@+id/awayOffsides"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="1"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutPenalties"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homePenalties"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="1"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomePen"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Penalties"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayPen"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/textColorError"/>
-                    <TextView
-                        android:id="@+id/awayPenalties"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="3dp"
-                app:cardUseCompatPadding="true">
-                <LinearLayout
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <include layout="@layout/stats_bar_layout"
+                    android:id="@+id/layoutCorners"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/homeCorners"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="5"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imHomeCorners"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Corners"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                    <ImageView
-                        android:id="@+id/imAwayCorners"
-                        android:visibility="invisible"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_drop_up_black"
-                        android:tint="@color/textColorError"/>
-                    <TextView
-                        android:id="@+id/awayCorners"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="4"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:gravity="center"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

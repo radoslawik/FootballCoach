@@ -74,9 +74,10 @@ public class Match implements Parcelable {
         }
     };
 
-    public int getGameId() {
-        return gameId;
+    public String getHomeName() {
+        return homeName;
     }
+
 
     public String getOpponentName() {
         return opponentName;
@@ -92,13 +93,6 @@ public class Match implements Parcelable {
 
     public String getPlayedWhere() {
         return playedWhere;
-    }
-    public TeamStats getHomeStats() {
-        return homeStats;
-    }
-
-    public TeamStats getAwayStats() {
-        return awayStats;
     }
 
     public int getImageId() {
