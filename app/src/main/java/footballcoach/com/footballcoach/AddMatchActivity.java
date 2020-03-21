@@ -289,16 +289,20 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         String awayName = etAwayTeamName.getText().toString();
         if(awayName.equals("")) awayName = "Unknown name";
 
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+        String strDate = formatter.format(c);
+
         Match newMatch = new Match(
                 1,
                 "",
                 awayName,
                 spinner.getSelectedItem().toString(),
-                Calendar.getInstance().getTime(),
+                strDate,
                 matchLoc,
                 homeTeam,
                 awayTeam,
-                R.drawable.ic_menu_camera);
+                "");
         retIntent.putExtra("newMatch", newMatch);
         setResult(Activity.RESULT_OK, retIntent);
         finish();

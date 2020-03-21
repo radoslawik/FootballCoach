@@ -1,6 +1,7 @@
 package footballcoach.com.footballcoach;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,11 +50,16 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         if(match.homeStats.getScored()>match.awayStats.getScored()){
             holder.textViewScore.setTextColor(myContext.getResources().getColor(R.color.colorPrimary));
         } else if (match.homeStats.getScored()==match.awayStats.getScored()){
-            // keep black
+            holder.textViewScore.setTextColor(Color.BLACK);
         } else {
             holder.textViewScore.setTextColor(myContext.getResources().getColor(R.color.textColorError));
         }
-        holder.imageView.setImageDrawable(myContext.getResources().getDrawable(match.getImageId(), null));
+        if(match.getImagePath().equals("")){
+            holder.imageView.setImageDrawable(myContext.getResources().getDrawable(R.drawable.ic_menu_camera, null));
+        } else {
+            // to do
+        }
+
     }
 
     @Override

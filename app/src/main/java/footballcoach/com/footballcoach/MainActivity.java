@@ -1,9 +1,12 @@
 package footballcoach.com.footballcoach;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +26,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +46,9 @@ public class MainActivity extends AppCompatActivity
     private int ADD_MATCH_RESULT = 1;
     private boolean EDIT_MODE = false;
     private boolean DELETE_MODE = false;
+    private LocalDatabaseHelper localDbHelper;
+    private SQLiteDatabase localDb;
+    private ExternalDatabase externalDb;
 
     private TextView tvTeamName, tvEmpty;
     private RelativeLayout rlMain;
@@ -75,8 +83,13 @@ public class MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         tvTeamName = headerView.findViewById(R.id.tvTeamName);
 
+        localDbHelper = new LocalDatabaseHelper(this);
+        localDb = localDbHelper.getWritableDatabase();
+        //afterTableChange();
+        externalDb = new ExternalDatabase();
+
         if(savedInstanceState == null){
-            matchList = new ArrayList<>();
+            matchList = readFromLocalDatabase();
             //matchList = initializeMatchList();
         } else {
             matchList = savedInstanceState.getParcelableArrayList("myList");
@@ -108,10 +121,14 @@ public class MainActivity extends AppCompatActivity
                 System.out.println(position);
                 intent.putExtra("pos", position);
                 if(DELETE_MODE){
-                    matchList.remove(position);
-                    checkIfEmpty();
-                    adapter.notifyDataSetChanged();
-                    DELETE_MODE = false;
+                    long timestampToDelete = matchList.get(position).getGameId(); // get a timestamp of deleted match
+                    String[] tsToDelete = { String.valueOf(timestampToDelete) };
+                    matchList.remove(position); // remove clicked match
+                    checkIfEmpty(); // if no matches show the textview
+                    adapter.notifyDataSetChanged(); // update recycler view adapter
+                    localDb.delete(localDbHelper.getTableName(), "game_id=?", tsToDelete); // delete from local
+                    //externalDb.deleteMatch(timestampToDelete); // delete from external
+                    DELETE_MODE = false; // exit delete mode
                     Toast.makeText(getApplicationContext(),"Match deleted",Toast.LENGTH_SHORT).show();
                 } else if (EDIT_MODE) {
                     Toast.makeText(getApplicationContext(),"Edit match feature not available",Toast.LENGTH_SHORT).show();
@@ -181,8 +198,10 @@ public class MainActivity extends AppCompatActivity
             if(resultCode == Activity.RESULT_OK){
                 Match result = data.getParcelableExtra("newMatch");
                 result.homeName = TEAM_NAME;
+                result.gameId = System.nanoTime();
                 matchList.add(0, result );
                 checkIfEmpty();
+                addToDatabase(result);
                 adapter.notifyDataSetChanged();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -195,17 +214,19 @@ public class MainActivity extends AppCompatActivity
         ArrayList<Match> res = new ArrayList<>();
 
         Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+        String strDate = formatter.format(c);
 
         res.add(new Match(
                 1,
                 TEAM_NAME,
                 "YourTeam1",
                 "Friendly",
-                c,
-                "Defaultstreet,\nParis",
+                strDate,
+                "StreetName,CitynNme",
                 new TeamStats(),
                 new TeamStats(),
-                R.drawable.ic_menu_camera
+                ""
                 ));
         return res;
     }
@@ -229,6 +250,116 @@ public class MainActivity extends AppCompatActivity
             tvEmpty.setVisibility(View.GONE);
         }
         return;
+    }
+
+    public void addToDatabase(Match m){
+        localDb = localDbHelper.getWritableDatabase();
+        ContentValues newRow = new ContentValues();
+        List<String> colNames = localDbHelper.getColNames();
+        newRow.put(colNames.get(0),  m.getGameId());
+        newRow.put(colNames.get(1),  m.getHomeName());
+        newRow.put(colNames.get(2),  m.getOpponentName());
+        newRow.put(colNames.get(3),  m.getGameType());
+        newRow.put(colNames.get(4),  m.getPlayedWhen());
+        newRow.put(colNames.get(5),  m.getPlayedWhere());
+        newRow.put(colNames.get(6),  m.getImagePath());
+        newRow.put(colNames.get(7),  m.homeStats.getScored());
+        newRow.put(colNames.get(8),  m.homeStats.getTotal_attemps());
+        newRow.put(colNames.get(9),  m.homeStats.getOn_target());
+        newRow.put(colNames.get(10), m.homeStats.getPossesion());
+        newRow.put(colNames.get(11), m.homeStats.getPasses());
+        newRow.put(colNames.get(12), m.homeStats.getPass_acc());
+        newRow.put(colNames.get(13), m.homeStats.getFouls());
+        newRow.put(colNames.get(14), m.homeStats.getYellow_cards());
+        newRow.put(colNames.get(15), m.homeStats.getRed_cards());
+        newRow.put(colNames.get(16), m.homeStats.getOffsides());
+        newRow.put(colNames.get(17), m.homeStats.getPenalties());
+        newRow.put(colNames.get(18), m.homeStats.getCorners());
+        newRow.put(colNames.get(19), m.awayStats.getScored());
+        newRow.put(colNames.get(20), m.awayStats.getTotal_attemps());
+        newRow.put(colNames.get(21), m.awayStats.getOn_target());
+        newRow.put(colNames.get(22), m.awayStats.getPossesion());
+        newRow.put(colNames.get(23), m.awayStats.getPasses());
+        newRow.put(colNames.get(24), m.awayStats.getPass_acc());
+        newRow.put(colNames.get(25), m.awayStats.getFouls());
+        newRow.put(colNames.get(26), m.awayStats.getYellow_cards());
+        newRow.put(colNames.get(27), m.awayStats.getRed_cards());
+        newRow.put(colNames.get(28), m.awayStats.getOffsides());
+        newRow.put(colNames.get(29), m.awayStats.getPenalties());
+        newRow.put(colNames.get(30), m.awayStats.getCorners());
+        localDb.insert(localDbHelper.getTableName(), null, newRow);
+
+        //now external db
+        //externalDb.addNewMatch(m);
+    }
+
+    public ArrayList<Match> readFromLocalDatabase(){
+        ArrayList<Match> retList = new ArrayList<>();
+        localDb = localDbHelper.getReadableDatabase();
+        List<String> colNames = localDbHelper.getColNames();
+        String sortOrder = colNames.get(0)+ " DESC";
+        Cursor cursor = localDb.query(
+                localDbHelper.getTableName(), null, null, null, null, null, sortOrder);
+        while(cursor.moveToNext()) {
+            long itemId = cursor.getLong(cursor.getColumnIndexOrThrow(colNames.get(0)));
+            String itemHomeName = cursor.getString(cursor.getColumnIndexOrThrow(colNames.get(1)));
+            String itemAwayName = cursor.getString(cursor.getColumnIndexOrThrow(colNames.get(2)));
+            String itemGameType = cursor.getString(cursor.getColumnIndexOrThrow(colNames.get(3)));
+            String itemDate = cursor.getString(cursor.getColumnIndexOrThrow(colNames.get(4)));
+            String itemLocation = cursor.getString(cursor.getColumnIndexOrThrow(colNames.get(5)));
+            String itemImagePath = cursor.getString(cursor.getColumnIndexOrThrow(colNames.get(6)));
+            TeamStats home = new TeamStats(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(7))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(8))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(9))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(10))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(11))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(12))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(13))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(14))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(15))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(16))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(17))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(18)))
+            );
+            TeamStats away = new TeamStats(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(19))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(20))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(21))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(22))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(23))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(24))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(25))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(26))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(27))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(28))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(29))),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(colNames.get(30)))
+            );
+            retList.add(new Match(
+                    itemId,
+                    itemHomeName,
+                    itemAwayName,
+                    itemGameType,
+                    itemDate,
+                    itemLocation,
+                    home,
+                    away,
+                    itemImagePath
+            ));
+            System.out.println("game id");
+            System.out.println(itemId);
+            System.out.println("game date");
+            System.out.println(itemDate);
+            System.out.println("\n");
+        }
+        cursor.close();
+        return retList;
+    }
+
+    public void afterTableChange(){
+        localDb = localDbHelper.getWritableDatabase();
+        localDb.execSQL("DROP TABLE IF EXISTS "+ localDbHelper.getTableName());
     }
 
     @Override

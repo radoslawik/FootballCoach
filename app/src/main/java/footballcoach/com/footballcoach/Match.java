@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Match implements Parcelable {
-    int gameId;
+    long gameId;
     String homeName;
     String opponentName;
     String gameType;
@@ -15,25 +15,23 @@ public class Match implements Parcelable {
     String playedWhere;
     TeamStats homeStats;
     TeamStats awayStats;
-    private int imageId;
+    private String imagePath;
 
-    public Match(int gameId, String homeName, String opponentName, String gameType,
-                 Date playedWhen, String strLoc, TeamStats homeStats, TeamStats awayStats, int imageId) {
+    public Match(long gameId, String homeName, String opponentName, String gameType,
+                 String playedWhen, String strLoc, TeamStats homeStats, TeamStats awayStats, String imageId) {
         this.gameId = gameId;
         this.homeName = homeName;
         this.opponentName = opponentName;
         this.gameType = gameType;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-        String strDate = formatter.format(playedWhen);
-        this.playedWhen = strDate;
+        this.playedWhen = playedWhen;
         this.playedWhere = strLoc;
         this.homeStats = homeStats;
         this.awayStats = awayStats;
-        this.imageId = imageId;
+        this.imagePath = imageId;
     }
 
     protected Match(Parcel in) {
-        gameId = in.readInt();
+        gameId = in.readLong();
         homeName = in.readString();
         opponentName = in.readString();
         gameType = in.readString();
@@ -41,12 +39,12 @@ public class Match implements Parcelable {
         playedWhere = in.readString();
         homeStats = in.readParcelable(TeamStats.class.getClassLoader());
         awayStats = in.readParcelable(TeamStats.class.getClassLoader());
-        imageId = in.readInt();
+        imagePath = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(gameId);
+        dest.writeLong(gameId);
         dest.writeString(homeName);
         dest.writeString(opponentName);
         dest.writeString(gameType);
@@ -54,7 +52,7 @@ public class Match implements Parcelable {
         dest.writeString(playedWhere);
         dest.writeParcelable(homeStats, flags);
         dest.writeParcelable(awayStats, flags);
-        dest.writeInt(imageId);
+        dest.writeString(imagePath);
     }
 
     @Override
@@ -74,10 +72,13 @@ public class Match implements Parcelable {
         }
     };
 
+    public long getGameId() {
+        return gameId;
+    }
+
     public String getHomeName() {
         return homeName;
     }
-
 
     public String getOpponentName() {
         return opponentName;
@@ -95,15 +96,14 @@ public class Match implements Parcelable {
         return playedWhere;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImagePath() {
+        return imagePath;
     }
-
     public String getTitle() {
         return homeName + " vs " + opponentName;
     }
 
     public String getScore(){
-        return Integer.toString(homeStats.scored) + ":" + Integer.toString(awayStats.scored);
+        return Integer.toString(homeStats.getScored()) + ":" + Integer.toString(awayStats.getScored());
     }
 }

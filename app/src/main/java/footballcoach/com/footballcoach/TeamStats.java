@@ -67,12 +67,12 @@ public class TeamStats implements Parcelable {
 
 
 
-    public TeamStats(int scored, int total_attemps, int on_target, int possesion, int passes, int pass_acc,
-                     int fouls, int yellow_cards, int red_cards, int offsides, int corners, int penalties) {
+    public TeamStats(int scored, int total_attemps, int on_target, int possession, int passes, int pass_acc,
+                     int fouls, int yellow_cards, int red_cards, int offsides, int penalties, int corners) {
         this.scored = scored;
         this.total_attemps = total_attemps;
         this.on_target = on_target;
-        this.possesion = possesion;
+        this.possesion = possession;
         this.passes = passes;
         this.pass_acc = pass_acc;
         this.fouls = fouls;
