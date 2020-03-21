@@ -20,7 +20,29 @@
     <string name="offsides">Offsides</string>
     <string name="penalties">Penalties</string>
     <string name="corners">Corners</string>
-
+    <string name="street_name">Street name,\nCity name</string>
+    <string name="dates">Day Month Year</string>
+    <string name="played_versus">Played versus:</string>
+    <string name="goals_scored">Goals scored:</string>
+    <string name="goals_conceded">Goals conceded:</string>
+    <string name="add_photo">Add \nphoto</string>
+    <string name="match_type">Match type:</string>
+    <string name="home">Home</string>
+    <string name="away">Away</string>
+    <string name="No_matches_to_show">No matches to show</string>
+    <string name="myteam">My Team</string>
+    <string name="awayteam">Away Team</string>
+    <string name="statistics">Statistics</string>
+    <string name="street_city">Street, City</string>
+    <string name="away_team_name">Away team name</string>
+    <string name="add_match">Add match</string>
+    <string name="friendly">FRIENDLY</string>
+    <string name="yourteam">Your Team</string>
+    <string name="new_team_name">New team name</string>
+    <string name="show_statistics">Show statistics</string>
+    <string name="edit_match">Edit match</string>
+    <string name="remove_match">Remove match</string>
+    <string name="rename_team">Rename team</string>
     <string-array name="match_types">
         <item>League</item>
         <item>Friendly</item>

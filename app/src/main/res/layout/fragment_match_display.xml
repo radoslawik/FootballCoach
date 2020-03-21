@@ -46,7 +46,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="MyTeam"
+                    android:text="@string/myteam"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold" />
@@ -85,7 +85,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="AwayTeam"
+                    android:text="@string/awayteam"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold" />
@@ -138,7 +138,7 @@
                         android:paddingEnd="15dp"
                         android:paddingRight="15dp"
                         android:paddingBottom="4dp"
-                        android:text="Statistics"
+                        android:text="@string/statistics"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold" />
@@ -243,7 +243,7 @@
                         android:layout_weight="4"
                         android:gravity="center_vertical"
                         android:maxLines="2"
-                        android:text="street, city"
+                        android:text="@string/street_city"
                         android:textAlignment="gravity"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
@@ -261,7 +261,7 @@
                         android:layout_gravity="left|center_vertical"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:text="date"
+                        android:text="Date"
                         android:textAlignment="gravity"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
                 </LinearLayout>

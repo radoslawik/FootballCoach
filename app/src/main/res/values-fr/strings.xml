@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CoachFootball</string>
+    <string name="navigation_drawer_open">Ouvrir la liste de navigation</string>
+    <string name="navigation_drawer_close">Fermer la liste de navigation</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">En-tête de navigation</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="title_activity_browse_games">Jeuxnavigateur</string>
+    <string name="section_format">Bonjour le monde de la section: %1$d</string>
+
+    <string name="shots">Tirs</string>
+    <string name="shots_on_target">Tirs Cadrés</string>
+    <string name="ball_possession">Possession de la balle</string>
+    <string name="passes">Passes</string>
+    <string name="pass_accuracy">Precision Passés</string>
+    <string name="fouls">Fautes</string>
+    <string name="yellow_cards">Cartons Jaunes</string>
+    <string name="red_cards">Cartons Rouge</string>
+    <string name="offsides">Hors-jeu</string>
+    <string name="penalties">Pénalités</string>
+    <string name="corners">Corners</string>
+    <string name="street_name">Nom de rue,\nNom de ville</string>
+    <string name="dates">Jour Mois Année</string>
+    <string name="played_versus">Joué contre:</string>
+    <string name="goals_scored">Buts marqués:</string>
+    <string name="goals_conceded">Buts encaissés:</string>
+    <string name="add_photo">Ajouter,\nUne photo</string>
+    <string name="match_type">Type de match:</string>
+    <string name="home">Domicile</string>
+    <string name="away">Extérieur</string>
+    <string name="No_matches_to_show">Aucun match à afficher</string>
+    <string name="myteam">Mon équipe</string>
+    <string name="awayteam">Autre équipe </string>
+    <string name="statistics">Statistiques</string>
+    <string name="street_city">Rue, Ville</string>
+    <string name="away_team_name">Nom de léquipe à extérieur</string>
+    <string name="add_match">Ajouter un match</string>
+    <string name="friendly">AMICAL</string>
+    <string name="yourteam">Ton équipe</string>
+    <string name="new_team_name">Nouveau nom déquipe</string>
+    <string name="show_statistics">Afficher les statistiques</string>
+    <string name="edit_match">Modifier le match</string>
+    <string name="remove_match">Supprimer le match</string>
+    <string name="rename_team">Renommer léquipe</string>
+    <string-array name="match_types">
+        <item>Coupe</item>
+        <item>Amicale</item>
+        <item>Ligue</item>
+    </string-array>
+</resources>

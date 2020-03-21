@@ -7,23 +7,23 @@
         <item
             android:id="@+id/nav_stats"
             android:icon="@drawable/ic_show_chart_black"
-            android:title="Show statistics" />
+            android:title="@string/show_statistics" />
         <item
             android:id="@+id/nav_add"
             android:icon="@drawable/ic_add_black"
-            android:title="Add match" />
+            android:title="@string/add_match" />
         <item
             android:id="@+id/nav_edit"
             android:icon="@drawable/ic_create_black"
-            android:title="Edit match" />
+            android:title="@string/edit_match" />
         <item
             android:id="@+id/nav_delete"
             android:icon="@drawable/ic_clear_black"
-            android:title="Remove match" />
+            android:title="@string/remove_match" />
         <item
             android:id="@+id/nav_rename"
             android:icon="@drawable/ic_sort_black"
-            android:title="Rename team" />
+            android:title="@string/rename_team" />
     </group>
 
     <item android:title="Credits">
