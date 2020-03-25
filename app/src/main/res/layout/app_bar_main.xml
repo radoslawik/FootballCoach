@@ -24,6 +24,7 @@
                 android:padding="7dp"
                 android:layout_gravity="center"
                 android:src="@drawable/footballcoach" />
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

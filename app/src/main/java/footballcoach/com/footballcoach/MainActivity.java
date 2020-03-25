@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,13 +43,14 @@ public class MainActivity extends AppCompatActivity
     private MatchAdapter adapter;
     private ArrayList<Match> matchList;
     private Intent intent;
-    private String TEAM_NAME = "MyTeam";
+    private String TEAM_NAME;
     private int ADD_MATCH_RESULT = 1;
     private boolean EDIT_MODE = false;
     private boolean DELETE_MODE = false;
     private LocalDatabaseHelper localDbHelper;
     private SQLiteDatabase localDb;
     private ExternalDatabase externalDb;
+    private SharedPreferences sharedPref;
 
     private TextView tvTeamName, tvEmpty;
     private RelativeLayout rlMain;
@@ -82,6 +84,11 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         tvTeamName = headerView.findViewById(R.id.tvTeamName);
+
+        // red team name from shared preferences
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        TEAM_NAME = sharedPref.getString("teamName", "myTeam");
+        tvTeamName.setText(TEAM_NAME);
 
         localDbHelper = new LocalDatabaseHelper(this);
         localDb = localDbHelper.getWritableDatabase();
@@ -158,7 +165,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_stats){
-            Toast.makeText(this,"Feature not implemented",Toast.LENGTH_SHORT).show();
+            if(!matchList.isEmpty()){
+                Intent intentShowStats =  new Intent(MainActivity.this, ShowStatsActivity.class);
+                intentShowStats.putParcelableArrayListExtra("data", matchList);
+                startActivity(intentShowStats);
+            } else {
+                Toast.makeText(getApplicationContext(),"There is no stats to show",Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_add) {
             Intent intentAddMatch =  new Intent(MainActivity.this, AddMatchActivity.class);
             startActivityForResult(intentAddMatch, ADD_MATCH_RESULT);
@@ -239,8 +252,11 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this,"Team name changed successfully",Toast.LENGTH_SHORT).show();
             TEAM_NAME = teamName;
             tvTeamName.setText(TEAM_NAME);
+            sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("teamName", TEAM_NAME);
+            editor.apply();
         }
-        return;
     }
 
     public void checkIfEmpty(){

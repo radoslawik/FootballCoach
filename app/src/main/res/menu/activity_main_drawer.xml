@@ -26,7 +26,7 @@
             android:title="@string/rename_team" />
     </group>
 
-    <item android:title="Credits">
+    <item android:title="@string/credits">
         <menu>
             <item
                 android:icon="@drawable/ic_person_pin_black"

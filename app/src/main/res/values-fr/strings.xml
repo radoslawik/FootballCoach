@@ -10,6 +10,7 @@
     <string name="title_activity_browse_games">Jeuxnavigateur</string>
     <string name="section_format">Bonjour le monde de la section: %1$d</string>
 
+    <string name="goals">Buts</string>
     <string name="shots">Tirs</string>
     <string name="shots_on_target">Tirs Cadrés</string>
     <string name="ball_possession">Possession de la balle</string>
@@ -26,7 +27,7 @@
     <string name="played_versus">Joué contre:</string>
     <string name="goals_scored">Buts marqués:</string>
     <string name="goals_conceded">Buts encaissés:</string>
-    <string name="add_photo">Ajouter,\nUne photo</string>
+    <string name="add_photo">Ajouter une photo</string>
     <string name="match_type">Type de match:</string>
     <string name="home">Domicile</string>
     <string name="away">Extérieur</string>
@@ -41,9 +42,13 @@
     <string name="yourteam">Ton équipe</string>
     <string name="new_team_name">Nouveau nom déquipe</string>
     <string name="show_statistics">Afficher les statistiques</string>
-    <string name="edit_match">Modifier le match</string>
+    <string name="edit_match">Modifier le match</string>average
     <string name="remove_match">Supprimer le match</string>
     <string name="rename_team">Renommer léquipe</string>
+    <string name="credits">Crédits</string>
+    <string name="stats_average">Moyenne</string>
+    <string name="stats_best">Meilleure</string>
+    <string name="stats_worst">Pire</string>
     <string-array name="match_types">
         <item>Coupe</item>
         <item>Amicale</item>
