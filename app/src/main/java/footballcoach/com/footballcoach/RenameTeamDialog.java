@@ -33,7 +33,7 @@ public class RenameTeamDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newName = editTeamName.getEditText().getText().toString();
-                        listener.sendText(newName);
+                        listener.sendNewTeamName(newName);
                         return;
                     }
                 });
@@ -53,6 +53,6 @@ public class RenameTeamDialog extends AppCompatDialogFragment {
     }
 
     public interface RenameTeamListener{
-        void sendText(String teamName);
+        void sendNewTeamName(String teamName);
     }
 }

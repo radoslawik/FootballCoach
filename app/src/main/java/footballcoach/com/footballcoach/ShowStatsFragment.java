@@ -15,12 +15,9 @@ import java.util.List;
 
 public class ShowStatsFragment extends Fragment {
 
-    private TeamStats homeStats;
-    private TeamStats awayStats;
-
-    List<String> statNames;
-    List<Integer> homeStatValues, awayStatValues;
-    List<View> statLayouts;
+    private List<String> statNames;
+    private float[] homeStatValues, awayStatValues;
+    private List<View> statLayouts;
 
     private TextView homeVal, awayVal, statName;
     private ImageView imHomeVal, imAwayVal;
@@ -33,9 +30,11 @@ public class ShowStatsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("checking if args are null");
         if (getArguments() != null) {
-            homeStats = getArguments().getParcelable("homeData");
-            awayStats = getArguments().getParcelable("awayData");
+            System.out.println("not null");
+            homeStatValues = getArguments().getFloatArray("homeData");
+            awayStatValues = getArguments().getFloatArray("awayData");
         }
     }
 
@@ -49,14 +48,14 @@ public class ShowStatsFragment extends Fragment {
         TextView currentTextView = vGoals.findViewById(R.id.statName);
         currentTextView.setText(getResources().getString(R.string.goals));
         currentTextView = vGoals.findViewById(R.id.homeValue);
-        currentTextView.setText(String.valueOf(homeStats.getScored()));
+        currentTextView.setText(String.format(java.util.Locale.US,"%.2f", homeStatValues[0]));
         currentTextView = vGoals.findViewById(R.id.awayValue);
-        currentTextView.setText(String.valueOf(awayStats.getScored()));
-        ImageView currentImageView = null;
-        if(homeStats.getScored() > awayStats.getScored()){
+        currentTextView.setText(String.format(java.util.Locale.US,"%.2f", awayStatValues[0]));
+        ImageView currentImageView;
+        if(homeStatValues[0] > awayStatValues[0]){
             currentImageView = fragView.findViewById(R.id.imHomeValue);
             currentImageView.setVisibility(View.VISIBLE);
-        } else if(homeStats.getScored() < awayStats.getScored()){
+        } else if(homeStatValues[0] < awayStatValues[0]){
             currentImageView = fragView.findViewById(R.id.imAwayValue);
             currentImageView.setVisibility(View.VISIBLE);
         }
@@ -75,34 +74,6 @@ public class ShowStatsFragment extends Fragment {
                 getResources().getString(R.string.corners)
         );
 
-        homeStatValues = Arrays.asList(
-                homeStats.getTotal_attemps(),
-                homeStats.getOn_target(),
-                homeStats.getPossesion(),
-                homeStats.getPasses(),
-                homeStats.getPass_acc(),
-                homeStats.getFouls(),
-                homeStats.getYellow_cards(),
-                homeStats.getRed_cards(),
-                homeStats.getOffsides(),
-                homeStats.getPenalties(),
-                homeStats.getCorners()
-        );
-
-        awayStatValues = Arrays.asList(
-                awayStats.getTotal_attemps(),
-                awayStats.getOn_target(),
-                awayStats.getPossesion(),
-                awayStats.getPasses(),
-                awayStats.getPass_acc(),
-                awayStats.getFouls(),
-                awayStats.getYellow_cards(),
-                awayStats.getRed_cards(),
-                awayStats.getOffsides(),
-                awayStats.getPenalties(),
-                awayStats.getCorners()
-        );
-
         statLayouts = Arrays.asList(
                 fragView.findViewById(R.id.layoutShots),
                 fragView.findViewById(R.id.layoutShotsOnTarget),
@@ -116,8 +87,9 @@ public class ShowStatsFragment extends Fragment {
                 fragView.findViewById(R.id.layoutPenalties),
                 fragView.findViewById(R.id.layoutCorners)
         );
+
         View viewCurrentStat;
-        int homeNum, awayNum;
+        float homeNum, awayNum;
         String statTxt;
         for(int i=0; i<statLayouts.size(); i++){
             viewCurrentStat = statLayouts.get(i);
@@ -127,19 +99,19 @@ public class ShowStatsFragment extends Fragment {
             imHomeVal = viewCurrentStat.findViewById(R.id.imHomeValue);
             imAwayVal = viewCurrentStat.findViewById(R.id.imAwayValue);
 
-            homeNum = homeStatValues.get(i);
-            awayNum = awayStatValues.get(i);
+            homeNum = homeStatValues[i+1];
+            awayNum = awayStatValues[i+1];
             statTxt = statNames.get(i);
             /* stats with percentage values
              * 2 - BALL POSSESSION
              * 4 - PASS ACCURACY
              * */
             if(i==2 || i==4){
-                homeVal.setText(String.valueOf(homeNum+"%"));
-                awayVal.setText(String.valueOf(awayNum+"%"));
+                homeVal.setText(String.format(java.util.Locale.US,"%.2f", homeNum)+"%");
+                awayVal.setText(String.format(java.util.Locale.US,"%.2f", awayNum)+"%");
             } else {
-                homeVal.setText(String.valueOf(homeNum));
-                awayVal.setText(String.valueOf(awayNum));
+                homeVal.setText(String.format(java.util.Locale.US,"%.2f", homeNum));
+                awayVal.setText(String.format(java.util.Locale.US,"%.2f", awayNum));
             }
 
             statName.setText(statTxt);

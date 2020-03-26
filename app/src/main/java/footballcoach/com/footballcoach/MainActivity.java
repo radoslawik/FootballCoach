@@ -63,8 +63,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar); // get instance of toolbar
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false); // hide app title
 
-        rlMain = (RelativeLayout)findViewById(R.id.rlMain);
-
+        // floating add button initialization
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,39 +73,44 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        // drawer initialization
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // initialize navigation view
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         tvTeamName = headerView.findViewById(R.id.tvTeamName);
 
-        // red team name from shared preferences
+        // read team name from shared preferences
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        TEAM_NAME = sharedPref.getString("teamName", "myTeam");
+        TEAM_NAME = sharedPref.getString("teamName", "myTeam"); // if not there use default
         tvTeamName.setText(TEAM_NAME);
 
+        //get local database instance
         localDbHelper = new LocalDatabaseHelper(this);
         localDb = localDbHelper.getWritableDatabase();
-        //afterTableChange();
+        //afterTableChange(); // if db design was changed
         externalDb = new ExternalDatabase();
 
+        // if opened for the first time read from database, otherwise read from saved state
         if(savedInstanceState == null){
             matchList = readFromLocalDatabase();
-            //matchList = initializeMatchList();
         } else {
             matchList = savedInstanceState.getParcelableArrayList("myList");
         }
 
         tvEmpty = (TextView)findViewById(R.id.tvEmpty);
-        checkIfEmpty();
+        checkIfEmpty(); // if matchlist is empty show text
 
+        //initialize recycler view and adjust design to current orientation
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+        rlMain = (RelativeLayout)findViewById(R.id.rlMain);
         int currentOrientation = this.getResources().getConfiguration().orientation;
         if(currentOrientation == Configuration.ORIENTATION_LANDSCAPE){
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -118,6 +122,7 @@ public class MainActivity extends AppCompatActivity
         adapter = new MatchAdapter(this, matchList);
         recyclerView.setAdapter(adapter);
 
+        // prepare to start display activity
         intent = new Intent(this, MatchDisplayActivity.class);
         intent.putParcelableArrayListExtra("data", matchList);
 
@@ -223,29 +228,8 @@ public class MainActivity extends AppCompatActivity
         }
     }//onActivityResult
 
-    public ArrayList<Match> initializeMatchList(){
-        ArrayList<Match> res = new ArrayList<>();
-
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-        String strDate = formatter.format(c);
-
-        res.add(new Match(
-                1,
-                TEAM_NAME,
-                "YourTeam1",
-                "Friendly",
-                strDate,
-                "StreetName,CitynNme",
-                new TeamStats(),
-                new TeamStats(),
-                ""
-                ));
-        return res;
-    }
-
     @Override
-    public void sendText(String teamName) {
+    public void sendNewTeamName(String teamName) {
         if(teamName.length()>16 || teamName.isEmpty()){
             Toast.makeText(this,"Invalid team name",Toast.LENGTH_SHORT).show();
         } else {
@@ -373,10 +357,10 @@ public class MainActivity extends AppCompatActivity
         return retList;
     }
 
-    public void afterTableChange(){
+/*    public void afterTableChange(){
         localDb = localDbHelper.getWritableDatabase();
         localDb.execSQL("DROP TABLE IF EXISTS "+ localDbHelper.getTableName());
-    }
+    }*/
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
