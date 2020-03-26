@@ -1,6 +1,8 @@
 package footballcoach.com.footballcoach;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,7 +59,8 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         if(match.getImagePath().equals("")){
             holder.imageView.setImageDrawable(myContext.getResources().getDrawable(R.drawable.ic_menu_camera, null));
         } else {
-            // to do
+            holder.imageView.setImageDrawable(myContext.getResources().getDrawable(R.drawable.ic_menu_camera, null));
+            setPic(holder.imageView, match.getImagePath());
         }
 
     }
@@ -66,6 +69,35 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     public int getItemCount() {
         return matchList.size();
     }
+
+    private void setPic(ImageView imageView, String currentPhotoPath) {
+        // Get the dimensions of the View
+
+        //int targetW = imageView.getWidth();
+        //int targetH = imageView.getHeight();
+        int targetW = 180;
+        int targetH = 120;
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+        imageView.setImageBitmap(bitmap);
+    }
+
+
 
     public static class MatchViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;

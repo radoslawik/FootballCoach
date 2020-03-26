@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -135,6 +136,8 @@ public class MainActivity extends AppCompatActivity
                 if(DELETE_MODE){
                     long timestampToDelete = matchList.get(position).getGameId(); // get a timestamp of deleted match
                     String[] tsToDelete = { String.valueOf(timestampToDelete) };
+                    File file = new File(matchList.get(position).getImagePath());
+                    file.delete(); // remove picture
                     matchList.remove(position); // remove clicked match
                     checkIfEmpty(); // if no matches show the textview
                     adapter.notifyDataSetChanged(); // update recycler view adapter

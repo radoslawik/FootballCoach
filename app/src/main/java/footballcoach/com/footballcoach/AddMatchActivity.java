@@ -190,6 +190,11 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         etAwayYellows = (EditText)findViewById(R.id.etAwayYellows);
         etAwayPenalties = (EditText)findViewById(R.id.etAwayPenalties);
 
+        if(savedInstanceState == null){
+            currentPhotoPath = "";
+        } else {
+            currentPhotoPath = savedInstanceState.getString("myPhotoPath");
+        }
     }
 
     public void addNewMatch(View view){
@@ -303,7 +308,7 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
                 matchLoc,
                 homeTeam,
                 awayTeam,
-                "");
+                currentPhotoPath);
         retIntent.putExtra("newMatch", newMatch);
         setResult(Activity.RESULT_OK, retIntent);
         finish();
@@ -379,7 +384,7 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = getFilesDir();
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -388,32 +393,14 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
+        System.out.println(currentPhotoPath);
         return image;
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("myPhotoPath", currentPhotoPath);
+    }
 
-/*    private void setPic() {
-        ImageView imageView = (ImageView)findViewById(R.id.testimage);
-        // Get the dimensions of the View
-        int targetW = imageView.getWidth();
-        int targetH = imageView.getHeight();
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
-        imageView.setImageBitmap(bitmap);
-    }*/
 }
