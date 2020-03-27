@@ -1,9 +1,11 @@
 package footballcoach.com.footballcoach;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -11,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity
     private SQLiteDatabase localDb;
     private ExternalDatabase externalDb;
     private SharedPreferences sharedPref;
+    private boolean moreDataLoaded = false;
 
     private TextView tvTeamName, tvEmpty;
     private RelativeLayout rlMain;
@@ -120,8 +125,21 @@ public class MainActivity extends AppCompatActivity
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             rlMain.setBackground(getResources().getDrawable(R.drawable.fcbackground_portrait));
         }
+
         adapter = new MatchAdapter(this, matchList);
         recyclerView.setAdapter(adapter);
+
+        // for the first time we scroll we will load data from external db
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL && !moreDataLoaded){
+                    externalDb.startSelectMatchTask();
+                    moreDataLoaded = true;
+                }
+            }
+        });
 
         // prepare to start display activity
         intent = new Intent(this, MatchDisplayActivity.class);
@@ -142,7 +160,7 @@ public class MainActivity extends AppCompatActivity
                     checkIfEmpty(); // if no matches show the textview
                     adapter.notifyDataSetChanged(); // update recycler view adapter
                     localDb.delete(localDbHelper.getTableName(), "game_id=?", tsToDelete); // delete from local
-                    //externalDb.deleteMatch(timestampToDelete); // delete from external
+                    externalDb.startDeleteMatchTask(timestampToDelete); // delete from external
                     DELETE_MODE = false; // exit delete mode
                     Toast.makeText(getApplicationContext(),"Match deleted",Toast.LENGTH_SHORT).show();
                 } else if (EDIT_MODE) {
@@ -153,6 +171,18 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
+
+        // if we receive message that matches are loaded from mysql we can show the data
+        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                System.out.println("MYSQL DATA RECEIVED");
+                matchList.clear();
+                matchList.addAll(externalDb.getMatchList());
+                adapter.notifyDataSetChanged();
+            }
+        },
+        new IntentFilter("data-received-mysql"));
     }
 
     @Override
@@ -219,11 +249,17 @@ public class MainActivity extends AppCompatActivity
             if(resultCode == Activity.RESULT_OK){
                 Match result = data.getParcelableExtra("newMatch");
                 result.homeName = TEAM_NAME;
-                result.gameId = System.nanoTime();
+                result.gameId = System.currentTimeMillis();
                 matchList.add(0, result );
                 checkIfEmpty();
                 addToDatabase(result);
+                externalDb.startAddMatchTask(result);
                 adapter.notifyDataSetChanged();
+                if(matchList.size()>5){
+                    System.out.println("Local database was full, removed last item");
+                    localDb.execSQL("DELETE FROM " + localDbHelper.getTableName() +
+                            " WHERE game_id = (SELECT MIN(game_id) FROM " + localDbHelper.getTableName() + ")");
+                }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result

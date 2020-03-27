@@ -1,37 +1,37 @@
 package footballcoach.com.footballcoach;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.v4.content.LocalBroadcastManager;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ExternalDatabase{
     private Connection connection;
-    private final String url = "jdbc:mysql://localhost:3306/footballcoach";
+    private final String url = "jdbc:mysql://10.0.2.2:3306/footballcoach";
     private final String user = "root";
     private final String password = "";
     private final String table = "matchdata";
+    AsyncTask<Void, Void, Void> runningTask;
+    public ArrayList<Match> matchList;
+
 
     public ExternalDatabase(){
-        try{
-            connection = DriverManager.getConnection(url,user,password);
-        } catch (SQLException e){
-            System.out.println("Couldn't connect to database");
-        }
-
+        matchList = new ArrayList<>();
     }
 
-    public ArrayList<Match> getMatches(){
+    public synchronized ArrayList<Match> getMatches(){
         // create a statement; whatever happens, the try-with-resource construct
         // will close the statement, which in turn will close the result set
         ArrayList<Match> list = new ArrayList<>();
 
-        try (Statement statement = connection.createStatement()) {
+        try {
+            connection = DriverManager.getConnection(url,user,password);
+            Statement statement = connection.createStatement();
             // execute the query
             ResultSet result = statement.executeQuery(
-                    "select * from " + table);
+                    "SELECT * FROM " + table + " ORDER BY game_id DESC");
             // convert the result set to a list
             while (result.next()) {
                 // accessing attributes by rank: 1, 2 & 3
@@ -74,8 +74,8 @@ public class ExternalDatabase{
                         ));
             }
             connection.close();
-        } catch (SQLException e) {
-            System.out.println("Error while executing query");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return list;
     }
@@ -85,6 +85,8 @@ public class ExternalDatabase{
         int r = 0;
 
         try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            connection = DriverManager.getConnection(url,user,password);
             Statement statement = connection.createStatement();
 
             // do not forget to enclose string litterals (e.g. job) between single quotes:
@@ -123,8 +125,8 @@ public class ExternalDatabase{
 
             r = statement.executeUpdate(query);
             connection.close();
-        } catch (SQLException e) {
-            System.out.println("Error while executing insert");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
         // one row should be inserted
@@ -135,16 +137,96 @@ public class ExternalDatabase{
 
         int r = 0;
         try {
+            connection = DriverManager.getConnection(url,user,password);
             Statement statement = connection.createStatement();
             // do not forget to enclose string litterals (e.g. job) between single quotes:
-            String query = "DELETE FROM MatchData WHERE game_id=" + String.valueOf(timestamp) + ";";
+            String query = "DELETE FROM matchdata WHERE game_id=" + String.valueOf(timestamp) + ";";
             r = statement.executeUpdate(query);
             connection.close();
-        } catch (SQLException e) {
-            System.out.println("Error while executing delete");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         // one row should be deleted
         return r == 1;
+    }
+
+    public void startAddMatchTask(Match m){
+        if (runningTask != null)
+            runningTask.cancel(true);
+        runningTask = new DbTask(m);
+        runningTask.execute();
+    }
+
+    public void startDeleteMatchTask(long ts){
+        if (runningTask != null)
+            runningTask.cancel(true);
+        runningTask = new DbTask(ts);
+        runningTask.execute();
+    }
+
+    public void startSelectMatchTask(){
+        if (runningTask != null)
+            runningTask.cancel(true);
+        runningTask = new DbTask();
+        runningTask.execute();
+    }
+
+    public ArrayList<Match> getMatchList() {
+        return matchList;
+    }
+
+    private class DbTask extends AsyncTask<Void, Void, Void> {
+        private Match matchToAdd;
+        private long tsToDelete;
+        private ArrayList<Match> selectedMatches;
+
+        public DbTask(Match m){
+            this.matchToAdd = m;
+            this.tsToDelete = 0;
+            this.selectedMatches = new ArrayList<>();
+        }
+
+        public DbTask(long ts){
+            this.matchToAdd = null;
+            this.tsToDelete = ts;
+            this.selectedMatches = new ArrayList<>();
+        }
+
+        public DbTask(){
+            this.matchToAdd = null;
+            this.tsToDelete = 0;
+            this.selectedMatches = new ArrayList<>();
+        }
+
+
+        protected Void doInBackground(Void... params) {
+            try {
+                if(matchToAdd!=null){
+                    addNewMatch(matchToAdd);
+                } else if (tsToDelete!=0) {
+                    deleteMatch(tsToDelete);
+                } else {
+                    selectedMatches = getMatches();
+                }
+            } catch (Exception e) { // in case of error
+                System.out.println(e.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if(!selectedMatches.isEmpty()){
+                matchList = selectedMatches;
+                System.out.println("received gameid");
+                System.out.println(matchList.get(0).getGameId());
+                Intent intent = new Intent("data-received-mysql");
+                LocalBroadcastManager.getInstance(null).sendBroadcast(intent);
+            }
+        }
+
+
     }
 
 }
