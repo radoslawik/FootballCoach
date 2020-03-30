@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
     private SQLiteDatabase localDb;
     private ExternalDatabase externalDb;
     private SharedPreferences sharedPref;
-    private boolean moreDataLoaded = false;
+    private boolean moreDataLoaded;
 
     private TextView tvTeamName, tvEmpty;
     private RelativeLayout rlMain;
@@ -105,8 +105,10 @@ public class MainActivity extends AppCompatActivity
 
         // if opened for the first time read from database, otherwise read from saved state
         if(savedInstanceState == null){
+            moreDataLoaded = false;
             matchList = readFromLocalDatabase();
         } else {
+            moreDataLoaded = savedInstanceState.getBoolean("myDataLoaded");
             matchList = savedInstanceState.getParcelableArrayList("myList");
         }
 
@@ -405,6 +407,7 @@ public class MainActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("myList", matchList);
+        outState.putBoolean("myDataLoaded", moreDataLoaded);
     }
 
 }

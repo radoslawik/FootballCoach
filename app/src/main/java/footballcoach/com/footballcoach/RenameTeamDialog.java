@@ -44,7 +44,6 @@ public class RenameTeamDialog extends AppCompatDialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         try {
             listener = (RenameTeamListener)context;
         } catch (Exception e) {
