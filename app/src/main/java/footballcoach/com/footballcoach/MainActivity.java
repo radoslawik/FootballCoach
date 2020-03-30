@@ -162,6 +162,9 @@ public class MainActivity extends AppCompatActivity
                     checkIfEmpty(); // if no matches show the textview
                     adapter.notifyDataSetChanged(); // update recycler view adapter
                     localDb.delete(localDbHelper.getTableName(), "game_id=?", tsToDelete); // delete from local
+                    if(position<=4){ //we need to add another game to local history to keep the 5 last matches
+                        addToDatabase(matchList.get(4));
+                    }
                     externalDb.startDeleteMatchTask(timestampToDelete); // delete from external
                     DELETE_MODE = false; // exit delete mode
                     Toast.makeText(getApplicationContext(),"Match deleted",Toast.LENGTH_SHORT).show();
