@@ -45,7 +45,6 @@ import java.util.Locale;
 public class AddMatchActivity extends AppCompatActivity implements LocationListener{
 
     private LocationManager locationManager;
-    private String locationProvider;
 
     static final int REQUEST_TAKE_PHOTO = 1;
     String currentPhotoPath;
@@ -327,6 +326,21 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         matchLoc = parsedLocation;
         txtLoc.setText(parsedLocation);
         locationManager.removeUpdates(this);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 
     public void addPhotoClick(View view)
