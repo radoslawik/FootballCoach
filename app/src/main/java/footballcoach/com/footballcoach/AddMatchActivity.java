@@ -77,21 +77,12 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         // location part
         matchLoc = "Unknown location";
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        locationProvider = locationManager.getBestProvider(criteria, false);
-        Location location = null;
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
         {
             System.out.println("Location permissions granted");
-            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-            location = locationManager.getLastKnownLocation(locationProvider);
-        }
-        if (location != null) {
-            System.out.println("Provider " + locationProvider + " has been selected.");
-            onLocationChanged(location);
-        } else {
-            System.out.println("Location not available");
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, this);
         }
 
         Date c = Calendar.getInstance().getTime();
@@ -335,21 +326,7 @@ public class AddMatchActivity extends AppCompatActivity implements LocationListe
         System.out.println(parsedLocation);
         matchLoc = parsedLocation;
         txtLoc.setText(parsedLocation);
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        Log.d("Latitude","disable");
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        Log.d("Latitude","enable");
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.d("Latitude","status");
+        locationManager.removeUpdates(this);
     }
 
     public void addPhotoClick(View view)

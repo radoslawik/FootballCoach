@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity
         //initialize recycler view and adjust design to current orientation
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+
         rlMain = (RelativeLayout)findViewById(R.id.rlMain);
         int currentOrientation = this.getResources().getConfiguration().orientation;
         if(currentOrientation == Configuration.ORIENTATION_LANDSCAPE){
